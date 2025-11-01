@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, viewport-fit=cover">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="format-detection" content="telephone=no">
+<link rel="shortcut icon" href=".https://adaptation-platform.nies.go.jp/favicon.ico">
+<link rel="apple-touch-icon" href="https://adaptation-platform.nies.go.jp/common/images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@100..900&family=Noto+Sans+JP:wght@100..900&family=Poppins:ital,wght@0,400;0,500;1,500&display=swap" rel="stylesheet">
+<link href="../common/css/base.css?ver=20250617" rel="stylesheet">
+<link href="../common/css/climate.css" rel="stylesheet">
+<title>気候変動適応とは ｜ 気候変動適応情報プラットフォーム（A-PLAT）</title>
+<link rel="canonical" href="https://adaptation-platform.nies.go.jp/climate_change_adapt/">
+<meta name="description" content="気候変動適応について、過去のデータや将来予測、様々な対策の紹介を含めて、６つの観点から解説しています。">
+<script src="../common/js/vendor.js"></script> 
+<script src="../common/js/scripts.js"></script> 
+<script src="../common/js/main.js"></script>
+
+
+
+
+<style>
+    /* 基本的なスタイリング */
+    .afaf {
+    margin-top: -80px;
+    padding: 120px 8rem 10rem;
+    
+    /* ↓ 変更点 1: position: relative と isolation: isolate を追加 */
+    /* positionは疑似要素を配置する基準となります */
+    position: relative;
+    /* isolationはz-indexの重なり順を管理しやすくします */
+    isolation: isolate; 
+    
+    /* ↓ 削除点: background-image は削除し、::before へ移動 */
+    /* background-image:url("../common/img/agri-bg.jpg"); */
+    
+    width: 100%;
+    height: 100%;
+    color: #fff; /* 文字を白に */
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    overflow: hidden;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+
+    /* (オプション) 背景画像が読み込めなかった場合のフォールバック */
+    background-color: #333; /* 暗い背景色 */
+}
+
+/* ↓ 追記: 背景画像用の疑似要素を追加 */
+.afaf::before {
+    /* 1. 疑似要素を機能させるためのおまじない */
+    content: ""; 
+    
+    /* 2. 親要素(.afaf)いっぱいに広げる */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* 3. 背景画像をこちらに設定 */
+    background-image: url("../img/agri-bg.jpg");
+    /* (オプション) 背景画像の表示方法を指定 */
+    background-size: cover;
+    background-position: center;
+    
+    /* 4. ★ここで彩度を落とす (50%に設定) */
+    /* 100%が通常、0%がモノクロです。数値を調整してください。 */
+    filter: saturate(50%);
+    
+    /* 5. テキスト(.afafのコンテンツ)の背後に配置する */
+    z-index: -1; 
+}
+
+    /* テキストコンテナのスタイリング */
+    .text-container {
+        text-align: left;
+    }
+
+    /* メインのコピーのスタイリング */
+    .main-copy {
+        font-size: 8vw; /* 画面幅に応じて文字サイズを調整 */
+        font-weight: bold;
+        line-height: 1.2;
+        text-transform: uppercase; /* 文字を大文字に */
+        letter-spacing: -0.033em;
+        /* アニメーションのために各単語をspanで囲む */
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    }
+
+    .main-copy .word {
+        display: inline-block;
+        /* アニメーションの初期状態 */
+        transform: translateY(100%);
+        opacity: 0;
+    }
+</style>
+
+
+
+
+<body>
+<script src="../common/js/front.js"></script>
+<header class="l-header js-header"><a class="l-header__logo for-mobile" href="/"><img src="https://adaptation-platform.nies.go.jp/common/images/common/logo.png" alt="気候変動適応情報プラットフォーム（A-PLAT" width="110" height="39"/></a>
+  <div class="l-header__wrap">
+    <a class="js-header-hide-item for-large" href="/everyone/campaign/index.html"><img src="https://adaptation-platform.nies.go.jp/common/images/common/banner_campaign.svg" alt="" width="auto" height="30" class="campaign-banner" /></a>	  
+	  <a class="l-header__text js-header-hide-item for-large" href="#main">本文へ</a>
+    <div class="l-header__logo2 js-header-hide-item">
+              <a href="https://www.nies.go.jp/index.html" target="_blank" rel="noopener"><picture>
+                <source media="(max-width: 959px)" srcset="https://adaptation-platform.nies.go.jp/common/images/common/nies-logo-sp.svg" width="40" height="40"/>
+                <img src="https://adaptation-platform.nies.go.jp/common/images/common/studies-logo.svg" alt="国立研究開発法人 国立環境研究所" width="157" height="30"/></picture></a>
+	  </div>
+    <button class="l-header__trigger js-header-trigger"><span></span><span></span><span></span></button>
+  </div>
+
+
+  <div class="l-header__menu-bg js-header-bg for-large"></div>
+  <div class="l-header__menu">
+    <nav class="l-header__menu-nav">
+      <ul class="l-header__menu-list">
+        <li><a class="l-header__menu-link -main arrow-hover" href="/climate_change_adapt/index.html"><span class="l-header__menu-icon u-select-none"><img src="https://adaptation-platform.nies.go.jp/common/images/common/side-icon-01.svg" alt="" width="24" height="24"/></span>気候変動適応とは<span class="icon-body"><span class="icon-wrap"><span class="icon">
+          <svg width="21" height="7" viewBox="0 0 21 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H19L14.3939 1" stroke="#2A2D32"/>
+          </svg>
+          </span><span class="icon">
+          <svg width="21" height="7" viewBox="0 0 21 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H19L14.3939 1" stroke="#2A2D32"/>
+          </svg>
+          </span><span class="icon">
+          <svg width="21" height="7" viewBox="0 0 21 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H19L14.3939 1" stroke="#2A2D32"/>
+          </svg>
+          </span></span></span></a></li>
+        <li>
+          <details class="l-header__menu-list-details">
+            <summary class="l-header__menu-list-summary">1.気候変動とは<span class="icon"></span></summary>
+            <span class="l-header__menu-list-details-body"><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0101.html">気候変動とは<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0102.html">気候変動の要因<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0103.html">これまでの気候<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0104.html">将来の気候<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-blue l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0105.html">将来気候の予測方法<span class="icon"></span><span class="link-hover-deco -gray"></span></a></span> </details>
+        </li>
+        <li>
+          <details class="l-header__menu-list-details">
+            <summary class="l-header__menu-list-summary">2.気候変動影響と対策<span class="icon"></span></summary>
+            <span class="l-header__menu-list-details-body"><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0201.html">さまざまな分野への影響<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0202.html">緩和<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0203.html">適応<span class="icon"></span><span class="link-hover-deco -gray"></span></a></span> </details>
+        </li>
+        <li>
+          <details class="l-header__menu-list-details">
+            <summary class="l-header__menu-list-summary">3.各分野の気候変動影響と<br>
+              適応<span class="icon"></span></summary>
+            <span class="l-header__menu-list-details-body"><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0301.html">農業・林業・水産業<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0302.html">水環境・水資源<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0303.html">自然生態系<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0304.html">自然災害・沿岸域<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0305.html">健康<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0306.html">産業・経済活動<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0307.html">国民生活・都市生活<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0308.html">海外での影響<span class="icon"></span><span class="link-hover-deco -gray"></span></a></span> </details>
+        </li>
+        <li>
+          <details class="l-header__menu-list-details">
+            <summary class="l-header__menu-list-summary">4.日本の適応<span class="icon"></span></summary>
+            <span class="l-header__menu-list-details-body"><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0401.html">国の適応<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-blue l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0402.html">適応法<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-blue l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0403.html">影響評価報告書<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-blue l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0404.html">国の適応計画<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-blue l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0405.html">府省庁の取組<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0406.html">地域の適応<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-blue l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0407.html">地方公共団体の役割<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-blue l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0408.html">地方公共団体の取組<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-blue l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0409.html">研究機関の取組<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0410.html">事業者の取組<span class="icon"></span><span class="link-hover-deco -gray"></span></a></span> </details>
+        </li>
+        <li>
+          <details class="l-header__menu-list-details">
+            <summary class="l-header__menu-list-summary">5.世界の適応<span class="icon"></span></summary>
+            <span class="l-header__menu-list-details-body"><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0501.html">世界の枠組み<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-blue l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0502.html">パリ協定<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-blue l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0503.html">IPCC<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-blue l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0504.html">IPCC第6次評価報告書<span class="icon"></span><span class="link-hover-deco -gray"></span></a></span> </details>
+        </li>
+        <li>
+          <details class="l-header__menu-list-details">
+            <summary class="l-header__menu-list-summary">6.私たちにできる適応<span class="icon"></span></summary>
+            <span class="l-header__menu-list-details-body"><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0601.html">学習コンテンツ<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0602.html">実生活で適応する<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-orange l-side__menu-link -first arrow-hover link-hover" href="/climate_change_adapt/adapt/a-0603.html">活動に参加する（市民参加、市民科学）<span class="icon"></span><span class="link-hover-deco -gray"></span></a></span> </details>
+        </li>
+        <li><a class="l-header__menu-link -sub arrow-hover link-hover" href="/climate_change_adapt/heatstroke/index.html">熱中症関連情報<span class="icon"></span><span class="link-hover-deco -gray"></span></a> </li>
+        <li><a class="l-header__menu-link -sub arrow-hover link-hover" href="/climate_change_adapt/ipcc/index.html">IPCC特集ページ<span class="icon"></span><span class="link-hover-deco -gray"></span></a> </li>
+        <li><a class="l-header__menu-link -sub arrow-hover link-hover" href="/climate_change_adapt/cop/index.html">COP関連情報<span class="icon"></span><span class="link-hover-deco -gray"></span></a> </li>
+        <li><a class="l-header__menu-link -sub arrow-hover link-hover" href="/climate_change_adapt/qa/index.html">ココが知りたい地球温暖化<span class="icon"></span><span class="link-hover-deco -gray"></span></a></li>
+        <li><a class="l-header__menu-link -sub arrow-hover link-hover" href="/climate_change_adapt/words.html">気候変動適応用語集<span class="icon"></span><span class="link-hover-deco -gray"></span></a></li>
+      </ul>
+      <ul class="l-header__menu-list">
+        <li><a class="l-header__menu-link -main arrow-hover" href="/everyone/index.html"><span class="l-header__menu-icon u-select-none"><img src="https://adaptation-platform.nies.go.jp/common/images/common/side-icon-02.svg" alt="" width="24" height="24"/></span>適応しよう<span class="icon-body"><span class="icon-wrap"><span class="icon">
+          <svg width="21" height="7" viewBox="0 0 21 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H19L14.3939 1" stroke="#2A2D32"/>
+          </svg>
+          </span><span class="icon">
+          <svg width="21" height="7" viewBox="0 0 21 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H19L14.3939 1" stroke="#2A2D32"/>
+          </svg>
+          </span><span class="icon">
+          <svg width="21" height="7" viewBox="0 0 21 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H19L14.3939 1" stroke="#2A2D32"/>
+          </svg>
+          </span></span></span></a></li>
+        <li>
+          <details class="l-header__menu-list-details">
+            <summary class="l-header__menu-list-summary">1.ライフスタイルの適応<span class="icon"></span></summary>
+            <span class="l-header__menu-list-details-body"><a class="-everyone-red l-side__menu-link -first arrow-hover link-hover" href="/everyone/15action/action01.html">猛暑でも快適に暮らそう<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-everyone-red l-side__menu-link -first arrow-hover link-hover" href="/everyone/15action/action02.html">サステナブルファッションを取り入れよう<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-everyone-red l-side__menu-link -first arrow-hover link-hover" href="/everyone/15action/action03.html">防災ノウハウを身につけよう<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-everyone-red l-side__menu-link -first arrow-hover link-hover" href="/everyone/15action/action04.html">防災グッズを揃えよう<span class="icon"></span><span class="link-hover-deco -gray"></span></a></span> </details>
+        </li>
+        <li>
+          <details class="l-header__menu-list-details">
+            <summary class="l-header__menu-list-summary">2.食の適応<span class="icon"></span></summary>
+            <span class="l-header__menu-list-details-body"><a class="-everyone-orange l-side__menu-link -first arrow-hover link-hover" href="/everyone/15action/action05.html">食の選択肢を増やそう<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-everyone-orange l-side__menu-link -first arrow-hover link-hover" href="/everyone/15action/action06.html">食品ロスを減らそう<span class="icon"></span><span class="link-hover-deco -gray"></span></a></span> </details>
+        </li>
+        <li>
+          <details class="l-header__menu-list-details">
+            <summary class="l-header__menu-list-summary">3.住まいの適応<span class="icon"></span></summary>
+            <span class="l-header__menu-list-details-body"><a class="-everyone-green l-side__menu-link -first arrow-hover link-hover" href="/everyone/15action/action07.html">エネルギーを効率よく使おう<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-everyone-green l-side__menu-link -first arrow-hover link-hover" href="/everyone/15action/action08.html">限りある水を大切に使おう<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-everyone-green l-side__menu-link -first arrow-hover link-hover" href="/everyone/15action/action09.html">おうち緑化しよう<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-everyone-green l-side__menu-link -first arrow-hover link-hover" href="/everyone/15action/action10.html">災害に強い家で暮らしを守ろう<span class="icon"></span><span class="link-hover-deco -gray"></span></a></span> </details>
+        </li>
+        <li>
+          <details class="l-header__menu-list-details">
+            <summary class="l-header__menu-list-summary">4.スポーツ・レジャーの適応<span class="icon"></span></summary>
+            <span class="l-header__menu-list-details-body"><a class="-everyone-blue l-side__menu-link -first arrow-hover link-hover" href="/everyone/15action/action11.html">運動に最適な環境を選ぼう<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-everyone-blue l-side__menu-link -first arrow-hover link-hover" href="/everyone/15action/action12.html">運動時にクーリングをしよう<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-everyone-blue l-side__menu-link -first arrow-hover link-hover" href="/everyone/15action/action13.html">感染症予防のために虫除け対策をしよう<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="-everyone-blue l-side__menu-link -first arrow-hover link-hover" href="/everyone/15action/action14.html">新しい旅の魅力に出会おう<span class="icon"></span><span class="link-hover-deco -gray"></span></a></span> </details>
+        </li>
+        <li>
+          <details class="l-header__menu-list-details">
+            <summary class="l-header__menu-list-summary">5.その他の適応<span class="icon"></span></summary>
+            <span class="l-header__menu-list-details-body"><a class="-everyone-purple l-side__menu-link -first arrow-hover link-hover" href="/everyone/15action/action15.html">適応しよう・参加しよう・シェアしよう<span class="icon"></span><span class="link-hover-deco -gray"></span></a></span> </details>
+        </li>
+        <li><a class="l-header__menu-link -sub arrow-hover link-hover" href="/everyone/school/index.html">A-PLAT KIDS<span class="icon"></span><span class="link-hover-deco -gray"></span></a> </li>
+      </ul>
+      <ul class="l-header__menu-list">
+        <li><a class="l-header__menu-link -main arrow-hover" href="/data/index.html"><span class="l-header__menu-icon u-select-none"><img src="https://adaptation-platform.nies.go.jp/common/images/common/side-icon-03.svg" alt="" width="24" height="24"/></span>適応事例・データ<span class="icon-body"><span class="icon-wrap"><span class="icon">
+          <svg width="21" height="7" viewBox="0 0 21 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H19L14.3939 1" stroke="#2A2D32"/>
+          </svg>
+          </span><span class="icon">
+          <svg width="21" height="7" viewBox="0 0 21 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H19L14.3939 1" stroke="#2A2D32"/>
+          </svg>
+          </span><span class="icon">
+          <svg width="21" height="7" viewBox="0 0 21 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H19L14.3939 1" stroke="#2A2D32"/>
+          </svg>
+          </span></span></span></a></li>
+        <li>
+          <details class="l-header__menu-list-details">
+            <summary class="l-header__menu-list-summary">適応事例<span class="icon"></span></summary>
+            <span class="l-header__menu-list-details-body"><a class="l-side__menu-link -first arrow-hover link-hover" href="/data/index.html#data01">適応事例 TOP<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/data/measures/index.html">国内外の適応策事例集<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/data/interview/index.html">適応策インタビュー<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/private_sector/nature-positive/index.html">ネイチャーポジティブと<br>
+            気候変動適応<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/private_sector/riskmgmt/index.html">気候リスク管理の事例<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/private_sector/opportunities/index.html">適応ビジネスの事例<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/private_sector/tcfd/index.html">TCFDに関する取組事例<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/local/infographic/index.html">インフォグラフィック（7分野編）<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/private_sector/infographic/index.html">インフォグラフィック（事業者編）<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/data/research/index.html">研究紹介<span class="icon"></span><span class="link-hover-deco -gray"></span></a></span> </details>
+        </li>
+        <li>
+          <details class="l-header__menu-list-details">
+            <summary class="l-header__menu-list-summary">気候変動の観測・予測データ<span class="icon"></span></summary>
+            <span class="l-header__menu-list-details-body"><a class="l-side__menu-link -first arrow-hover link-hover" href="/data/index.html#data02">気候変動の観測・予測データ TOP<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/data/jma-obs/index.html">気象観測データの長期変化の傾向<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="https://a-plat.nies.go.jp/aplat_amedas_viewer/index.html">気象観測データ閲覧ツール<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/webgis/index.html">気候変動の将来予測WebGIS<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/government/impact.html">気候変動による分野別影響＆適応<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/ccca/monitoring/phenology/index.html">国立環境研究所 市民調査員と連携した生物季節モニタリング<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/tools/e-learning/index.html">e-ラーニング 気候変動適応-影響・適応の基礎知識-<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/data/setosea.html">瀬戸内海の水環境への気候変動影響と将来予測<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/data/socioeconomic/index.html">社会経済シナリオに応じた市区町村別の将来の人口推計<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/external/nousui/index.html">気候変動の影響への適応に向けた将来展望ウェブ検索ツール<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/external/s18/index.html">気候変動影響予測・適応評価の総合的研究（S-18）<span class="icon"></span><span class="link-hover-deco -gray"></span></a></span> </details>
+        </li>
+        <li>
+          <details class="l-header__menu-list-details">
+            <summary class="l-header__menu-list-summary">研究者・専門家向け情報<span class="icon"></span></summary>
+            <span class="l-header__menu-list-details-body"><a class="l-side__menu-link -first arrow-hover link-hover" href="/data/index.html#data03">研究者・専門家向け情報 TOP<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/data/ia/index.html">気候変動影響評価報告書の引用文献<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/data/ref/index.html">学術誌論文<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/data/rep/index.html">梗概集、紀要等<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/data/stat/index.html">統計データ・白書等<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/ccca/institute/expert_review_team/data_list/index.html">気候変動関連データベース集<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover icon-link" href="https://diasjp.net/ds2022/" target="_blank">気候予測データセット2022及び解説書<span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/data/arcgis/index.html">WebGISによるデータ収集・共有・発信<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/deta/open_sdm/index.html">生き物の分布推定ツールオープンSDM<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/private_sector/impacts_info/tool/h08_water_risk.html">H08水リスクツール<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover icon-link" href="https://ccca-scenario.nies.go.jp/" target="_blank">A-PLAT Pro<span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover icon-link" href="/moej/action_plan/index.html" target="_blank">気候変動適応における広域アクションプラン策定事業<span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover icon-link" href="/moej/conso/index.html" target="_blank">地域適応コンソーシアム事業<span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/data/observation_projection/index.html">気候変動影響観測・影響予測の研究事例 <span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/data/priority-tool/index.html">気候変動適応策選択ツール<span class="icon"></span><span class="link-hover-deco -gray"></span></a></span> </details>
+        </li>
+      </ul>
+      <ul class="l-header__menu-list">
+        <li><a class="l-header__menu-link -main arrow-hover" href="/tools/index.html"><span class="l-header__menu-icon u-select-none"><img src="https://adaptation-platform.nies.go.jp/common/images/common/side-icon-04.svg" alt="" width="24" height="24"/></span>普及啓発・<br class="phone">
+          学習ツール<span class="icon-body"><span class="icon-wrap"><span class="icon">
+          <svg width="21" height="7" viewBox="0 0 21 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H19L14.3939 1" stroke="#2A2D32"/>
+          </svg>
+          </span><span class="icon">
+          <svg width="21" height="7" viewBox="0 0 21 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H19L14.3939 1" stroke="#2A2D32"/>
+          </svg>
+          </span><span class="icon">
+          <svg width="21" height="7" viewBox="0 0 21 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H19L14.3939 1" stroke="#2A2D32"/>
+          </svg>
+          </span></span></span></a></li>
+      </ul>
+      
+      <ul class="l-header__menu-list">
+        <li><a class="l-header__menu-link -main arrow-hover" href="/about/index.html">A-PLATについて<span class="icon-body"><span class="icon-wrap"><span class="icon">
+          <svg width="21" height="7" viewBox="0 0 21 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H19L14.3939 1" stroke="#2A2D32"/>
+          </svg>
+          </span><span class="icon">
+          <svg width="21" height="7" viewBox="0 0 21 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H19L14.3939 1" stroke="#2A2D32"/>
+          </svg>
+          </span><span class="icon">
+          <svg width="21" height="7" viewBox="0 0 21 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H19L14.3939 1" stroke="#2A2D32"/>
+          </svg>
+          </span></span></span></a></li>
+        <li><a class="l-header__menu-link -sub arrow-hover link-hover" href="/about/staff-interview/index.html">A-PLATは私たちが作っています<span class="icon"></span><span class="link-hover-deco -gray"></span></a> </li>
+        <li><a class="l-header__menu-link -sub arrow-hover link-hover" href="/about/faq.html">よくある質問<span class="icon"></span><span class="link-hover-deco -gray"></span></a> </li>
+        <li><a class="l-header__menu-link -sub arrow-hover link-hover" href="/about/contact.html">お問い合わせ<span class="icon"></span><span class="link-hover-deco -gray"></span></a> </li>
+        <li><a class="l-header__menu-link -sub arrow-hover link-hover" href="/about/sns.html">SNSについて<span class="icon"></span><span class="link-hover-deco -gray"></span></a> </li>
+        <li><a class="l-header__menu-link -sub arrow-hover link-hover" href="/about/magazine.html">メールマガジンについて<span class="icon"></span><span class="link-hover-deco -gray"></span></a> </li>
+        <li><a class="l-header__menu-link -sub arrow-hover link-hover" href="/about/policy.html">サイトポリシー<span class="icon"></span><span class="link-hover-deco -gray"></span></a> </li>
+        <li><a class="l-header__menu-link -sub arrow-hover link-hover" href="/about/privacypolicy.html">プライバシーポリシー<span class="icon"></span><span class="link-hover-deco -gray"></span></a> </li>
+        <li><a class="l-header__menu-link -sub arrow-hover link-hover" href="/about/saiyo.html">採用情報<span class="icon"></span><span class="link-hover-deco -gray"></span></a> </li>
+      </ul>
+      <ul class="l-header__menu-list">
+        <li><a class="l-header__menu-link -main arrow-hover" href="/ccca/index.html">CCCAの活動・アーカ<br class="for-large">
+          イブ<span class="icon-body"><span class="icon-wrap"><span class="icon">
+          <svg width="21" height="7" viewBox="0 0 21 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H19L14.3939 1" stroke="#2A2D32"/>
+          </svg>
+          </span><span class="icon">
+          <svg width="21" height="7" viewBox="0 0 21 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H19L14.3939 1" stroke="#2A2D32"/>
+          </svg>
+          </span><span class="icon">
+          <svg width="21" height="7" viewBox="0 0 21 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 6H19L14.3939 1" stroke="#2A2D32"/>
+          </svg>
+          </span></span></span></a></li>
+        <li>
+          <details class="l-header__menu-list-details">
+            <summary class="l-header__menu-list-summary">CCCAの活動<span class="icon"></span></summary>
+            <span class="l-header__menu-list-details-body"><a class="l-side__menu-link -first arrow-hover link-hover" href="/ccca/index.html#ccca01">CCCAの活動 TOP<span class="icon"></span><span class="link-hover-deco -gray"></span></a><!--<a class="l-side__menu-link -first arrow-hover link-hover" href="/ccca/history/index.html">A-PLAT開発経緯（沿革）<span class="icon"></span><span class="link-hover-deco -gray"></span></a>--><a class="l-side__menu-link -first arrow-hover link-hover" href="/ccca/report/index.html">活動報告<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/ccca/conference/index.html">主催したシンポジウム等<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/ccca/institute/liaison_meeting/index.html">気候変動に関する研究機関連絡会議<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/ccca/institute/expert_review_team/index.html">国立環境研究所主催の専門家会合<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/ccca/committee/index.html">検討会や審議会等の委員<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/ccca/outreach/index.html">担当した講演等<span class="icon"></span><span class="link-hover-deco -gray"></span></a></span> </details>
+        </li>
+        <li>
+          <details class="l-header__menu-list-details">
+            <summary class="l-header__menu-list-summary">情報アーカイブ<span class="icon"></span></summary>
+            <span class="l-header__menu-list-details-body"><a class="l-side__menu-link -first arrow-hover link-hover" href="/ccca/index.html#section02">情報アーカイブ TOP<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/archive/event/index.html">イベント情報<span class="icon"></span><span class="link-hover-deco -gray"></span></a><a class="l-side__menu-link -first arrow-hover link-hover" href="/archive/update/index.html">更新情報<span class="icon"></span><span class="link-hover-deco -gray"></span></a></span> </details>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="app-header"></div>
+<main class="l-main p-subpage">
+  <div class="app-sidebar"></div>
+  <div class="l-container">
+    <div class="l-container__wrap">
+
+
+<nav class="c-bread__nav -top">
+        <ol class="c-bread" itemscope="itemscope" itemtype="https://schema.org/BreadcrumbList" style="margin-left:1rem;">
+          <li itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a class="c-bread__link" href="../../index.html" itemprop="item"><span itemprop="name">HOME</span></a>
+            <meta itemprop="position" content="1">
+            <span class="c-bread__arrow">＞</span></li>
+      <!-- InstanceBeginEditable name="breadcrumb" -->
+          <li itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem">
+            <div class="c-bread__text" itemprop="item"> <a class="c-bread__link" href="../index.html" itemprop="item"><span itemprop="name">気候変動適応とは</span></a> </div>
+            <meta itemprop="position" content="2">
+            <span class="c-bread__arrow">＞</span> </li>
+          <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a itemprop="item" href="#"><span itemprop="name">Report</span></a>
+            <meta itemprop="position" content="3">
+          </li>
+          <!-- InstanceEndEditable -->
+        </ol>
+      </nav>
+
+
+
+<div class="afaf">
+<div class="text-container">
+    <h1 class="main-copy">
+        <span class="word">Agriculture,</span>
+        <span class="word">Forestry,</span>
+        <span class="word">and</span>
+        <span class="word">Fisheries</span>
+    </h1>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+
+<script>
+    // ページの読み込みが完了したらアニメーションを開始します
+    window.addEventListener('load', () => {
+        // .wordクラスを持つすべての要素に対してアニメーションを適用します
+        gsap.to('.word', {
+            y: 0, // Y軸方向の移動を0に（元の位置に）
+            opacity: 1, // 透明度を1に（表示）
+            duration: 1.5, // アニメーションの時間（秒）
+            stagger: 0.2, // 各要素のアニメーション開始を0.2秒ずつ遅らせる
+            ease: 'power3.out' // アニメーションの変化の仕方を指定
+        });
+    });
+</script>
+
+<div style="margin:1rem auto;">
+<div class="content-wrapper-afafaf">
+<h2>農・林・水産業</h2>
+
+
+
+<p>一次産業である農林水産業は自然環境を活かした産業であるため、当然ながら各種産業の中でも気候変動の影響を一番大きく受けるといっていい。</p>
+
+<p>要因と影響のメカニズムは概略図の通りである。CO<sub>2</sub>濃度上昇は光合成（施肥効果）に、気温上昇は病害虫に影響が及ぶ。このふたつは育成速度の変化を引き起こす。気温上昇や海面温度の変化は降水量に影響を与え、水環境が変化することで収穫量にも大きく影響が出る。また、海面水位が変化することで高潮、高波も発生し、農業用地にも影響を及ぼしつつある。
+</p>
+
+
+<h3>1.1.水稲</h3>
+
+<p>前記「気候変動適応計画」でも、また、農林水産省がまとめた「農林水産業気候変動適応計画」でも、その対象となる作物の一番はコメ（水稲）である。昨年からの「令和コメ騒動」をみても、日本人の食糧における関心の中心は主食であるコメだといえる。</p>
+<p>
+水稲における気候変動の影響は大きく「品質低下」「収穫量の低下（変動）」にわけられる。品質低下で言及の多いものは白未熟粒や胴割粒が代表的である。これらは食味だけでなく、栄養面でもでんぷんの不足などの問題がある。収益の面でも2等米として扱われることも多く、影響がある。原因としては、種まきからおよそ4ヶ月後、田植えから約50〜80日後に穂がでる「出穂」の時期の高温の影響が考えられている。この出穂の時期は本来であれば晴天が続き、光合成が必要であり、その収穫量、品質に大きく影響がある。</p>
+<p>
+しかし、晴天が適温ではなく高温になりすぎるとでんぷん合成機能に障害が出てしまい、白未熟粒や胴割粒が発生する。
+</p>
+<img src="../img/agri-01.jpg" style="margin:2rem 0 4rem;">
+<p>収穫量については、一部地域では既に収穫量の低下が見られる。例えば気候変動が現在より+2℃におさまり、変動が緩和される場合には東北地方の生産額は高まるが、緩和されない＋４℃の上昇の場合は低下する研究がある。この研究によると、気温１℃の上昇があると、東北で70億円の損失が生じる。九州では+2℃の上昇でも収穫量は低下し、1℃の気温上昇で120億円の損失額となる。<br />
+別のリサーチでは各種気候シナリオと市町村のパネルデータを用いて全国都道府県単位でのシミュレーションを行ったが、北海道、中国地方を除くエリアでは軒並み収穫量が低下した。</p>
+<p>
+これらの研究は多くが高温（温度変化）をその要因としているが、病害虫の増加、台風やゲリラ豪雨など気象の変動も多く発生していくことを考えると、やはり収穫量は将来にわたって減少傾向にあるといえる。<br />
+最新の農研機構モデル研究2021では、従来モデルの予測結果と比べ、コメ収量減少や、外観品質低下がより早く深刻化すると推定された。
+</p>
+<p>適応策としては、田植え時期の移動、高温にも耐える品種改良などが主流である。<br />
+品質低下を起こす高温障害に対し、農業従事者、JAなどでも注意喚起や対策を各種打ち出している。例えば作土深の確保や場内の地温をかん水などで下げる、収穫時期を刈り遅れのない時期にするなどである。水管理の徹底は農林水産省のレポートでも「最も多くとられた抑制対策」との報告がある。
+</p>
+<p>品種改良も農研機構をはじめ、各種研究機関で進められている。例えば農研機構の「<a href="https://www.naro.go.jp/laboratory/niaes/contents/41600/index.html">気候変動対策プロジェクト</a>」では「水稲の開花期高温不稔に対応する技術の開発」として、開花する時間帯を涼しい時間帯にすることで高温を回避できることを実証し、その仕組みを明らかにするとともに品種改良にいかそうとしている。
+<br />既に市場にでている高温帯性品種は年々作付面積比率も増えており、2015年に作付面積率6%が2022年には約13%と倍増している。品種名としては「にじきらめき」「新之助」「富富富」「よさこい美人」などが高温耐熱性をもった品種とされている。
+</p>
+
+
+</div>
+
+</div>
+</div>
+
+   
+      <nav class="c-bread__nav">
+        <ol class="c-bread" itemscope="itemscope" itemtype="https://schema.org/BreadcrumbList">
+          <li itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a class="c-bread__link" href="../index.html" itemprop="item"><span itemprop="name">HOME</span></a>
+            <meta itemprop="position" content="1"/>
+            <span class="c-bread__arrow">＞</span> </li>
+          <li itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem">
+            <div class="c-bread__text" itemprop="item"><span itemprop="name">気候変動適応とは</span></div>
+            <meta itemprop="position" content="2"/>
+          </li>
+        </ol>
+      </nav>
+      <div class="app-footer"></div>
+    </div>
+  </div>
+</main>
+
+<aside class="l-side for-large js-side">
+  <div class="l-side__bg"></div>
+  <div class="l-side__inner">
+    <div class="l-side__logo"><a href="/"><img src="https://adaptation-platform.nies.go.jp/common/images/common/logo.png" alt="A-PLAT" width="191" height="67"/></a></div>
+    <nav class="l-side__nav-main">
+      <ul class="l-side__nav-main-list">
+        <li class="l-side__nav-main-item"><a class="-hover l-side__nav-main-link link-hover js-side-menu-trigger js-side-current" href="/climate_change_adapt/index.html"><span class="l-side__nav-main-icon u-select-none"><img src="https://adaptation-platform.nies.go.jp/common/images/common/side-icon-01.svg" alt="" width="50" height="50"/></span>気候変動適応とは<span class="link-hover-deco"></span></a>
+          <div class="l-side__menu js-side-menu">
+            <div class="l-side__menu-content"><a class="l-side__menu-close js-side-menu-close" href=""></a>
+              <h2 class="l-side__menu-heading02"><a class="c-arrow-link arrow-hover" href="/climate_change_adapt/index.html"><span class="l-side__nav-main-icon u-select-none"><img src="https://adaptation-platform.nies.go.jp/common/images/common/side-icon-01.svg" alt="" width="50" height="50"/></span>気候変動適応とは<span class="icon-body" aria-hidden="true"><span class="icon-wrap"><span class="icon">
+                <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+                </svg>
+                </span><span class="icon">
+                <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+                </svg>
+                </span><span class="icon">
+                <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+                </svg>
+                </span></span></span></a> </h2>
+              <div class="l-side__menu-flex">
+                <div class="l-side__menu-stack">
+                  <h3 class="l-side__menu-heading03"><span>1.</span>気候変動とは</h3>
+                  <ul class="l-side__menu-list">
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0101.html">気候変動とは<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0102.html">気候変動の要因<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0103.html">これまでの気候<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0104.html">将来の気候<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-blue l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0105.html">将来気候の予測方法<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                  </ul>
+                </div>
+                <div class="l-side__menu-stack">
+                  <h3 class="l-side__menu-heading03"><span>2.</span>気候変動影響と対策</h3>
+                  <ul class="l-side__menu-list">
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0201.html">さまざまな分野への影響<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0202.html">緩和<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0203.html">適応<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                  </ul>
+                </div>
+                <div class="l-side__menu-stack">
+                  <h3 class="l-side__menu-heading03"><span>3.</span>各分野の気候変動影響と適応</h3>
+                  <ul class="l-side__menu-list">
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0301.html">農業・林業・水産業<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0302.html">水環境・水資源<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0303.html">自然生態系<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0304.html">自然災害・沿岸域<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0305.html">健康<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0306.html">産業・経済活動<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0307.html">国民生活・都市生活<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0308.html">海外での影響<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                  </ul>
+                </div>
+                <div class="l-side__menu-stack">
+                  <h3 class="l-side__menu-heading03"><span>4.</span>日本の適応</h3>
+                  <ul class="l-side__menu-list">
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0401.html">国の適応<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-blue l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0402.html">適応法<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-blue l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0403.html">影響評価報告書<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-blue l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0404.html">国の適応計画<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-blue l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0405.html">府省庁の取組<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0406.html">地域の適応<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-blue l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0407.html">地方公共団体の役割<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-blue l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0408.html">地方公共団体の取組<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-blue l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0409.html">研究機関の取組<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0410.html">事業者の取組<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                  </ul>
+                </div>
+                <div class="l-side__menu-stack">
+                  <h3 class="l-side__menu-heading03"><span>5.</span>世界の適応</h3>
+                  <ul class="l-side__menu-list">
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0501.html">世界の枠組み<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-blue l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0502.html">パリ協定<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-blue l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0503.html">IPCC<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-blue l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0504.html">IPCC第6次評価報告書<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                  </ul>
+                </div>
+                <div class="l-side__menu-stack">
+                  <h3 class="l-side__menu-heading03"><span>6.</span>私たちにできる適応</h3>
+                  <ul class="l-side__menu-list">
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0601.html">学習コンテンツ<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0602.html">実生活で適応する<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="-orange l-side__menu-link link-hover" href="/climate_change_adapt/adapt/a-0603.html">活動に参加する（市民参加、市民科学）<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                  </ul>
+                </div>
+                <div class="l-side__menu-stack"><a href="/climate_change_adapt/heatstroke/index.html">
+                  <h3 class="l-side__menu-heading03">熱中症関連情報</h3>
+                  </a> </div>
+                <div class="l-side__menu-stack"><a href="/climate_change_adapt/ipcc/index.html">
+                  <h3 class="l-side__menu-heading03">IPCC特集ページ</h3>
+                  </a> </div>
+                <div class="l-side__menu-stack"><a href="/climate_change_adapt/cop/index.html">
+                  <h3 class="l-side__menu-heading03">COP関連情報</h3>
+                  </a> </div>
+                <div class="l-side__menu-stack"><a href="/climate_change_adapt/qa/index.html">
+                  <h3 class="l-side__menu-heading03">ココが知りたい地球温暖化</h3>
+                  </a> </div>
+                <div class="l-side__menu-stack"><a href="/climate_change_adapt/words.html">
+                  <h3 class="l-side__menu-heading03">気候変動適応用語集</h3>
+                  </a> </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="l-side__nav-main-item"><a class="l-side__nav-main-link link-hover js-side-menu-trigger js-side-current" href="/everyone/index.html"><span class="l-side__nav-main-icon u-select-none"><img src="https://adaptation-platform.nies.go.jp/common/images/common/side-icon-02.svg" alt="" width="50" height="50"/></span>適応しよう<span class="link-hover-deco"></span></a>
+          <div class="l-side__menu js-side-menu">
+            <div class="l-side__menu-content"><a class="l-side__menu-close js-side-menu-close" href=""></a>
+              <h2 class="l-side__menu-heading02"><a class="c-arrow-link arrow-hover" href="/everyone/index.html"><span class="l-side__nav-main-icon u-select-none"><img src="https://adaptation-platform.nies.go.jp/common/images/common/side-icon-02.svg" alt="" width="50" height="50"/></span>適応しよう<span class="icon-body" aria-hidden="true"><span class="icon-wrap"><span class="icon">
+                <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+                </svg>
+                </span><span class="icon">
+                <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+                </svg>
+                </span><span class="icon">
+                <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+                </svg>
+                </span></span></span></a> </h2>
+              <div class="l-side__menu-flex">
+                <div class="l-side__menu-stack">
+                  <h3 class="l-side__menu-heading03"><span>1.</span>ライフスタイルの適応</h3>
+                    <ul class="l-side__menu-list">
+                      <li><a class="-everyone-red l-side__menu-link link-hover" href="/everyone/15action/action01.html">猛暑でも快適に暮らそう<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                      <li><a class="-everyone-red l-side__menu-link link-hover" href="/everyone/15action/action02.html">サステナブルファッションを取り入れよう<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                      <li><a class="-everyone-red l-side__menu-link link-hover" href="/everyone/15action/action03.html">防災ノウハウを身につけよう<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                      <li><a class="-everyone-red l-side__menu-link link-hover" href="/everyone/15action/action04.html">防災グッズを揃えよう<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    </ul>
+                  </div>
+                <div class="l-side__menu-stack">
+                  <h3 class="l-side__menu-heading03"><span>2.</span>食の適応</h3>
+                    <ul class="l-side__menu-list">
+                      <li><a class="-everyone-orange l-side__menu-link link-hover" href="/everyone/15action/action05.html">食の選択肢を増やそう<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                      <li><a class="-everyone-orange l-side__menu-link link-hover" href="/everyone/15action/action06.html">食品ロスを減らそう<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    </ul>
+                </div>
+                <div class="l-side__menu-stack">
+                  <h3 class="l-side__menu-heading03"><span>3.</span>住まいの適応</h3>
+                    <ul class="l-side__menu-list">
+                      <li><a class="-everyone-green l-side__menu-link link-hover" href="/everyone/15action/action07.html">エネルギーを効率よく使おう<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                      <li><a class="-everyone-green l-side__menu-link link-hover" href="/everyone/15action/action08.html">限りある水を大切に使おう<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                      <li><a class="-everyone-green l-side__menu-link link-hover" href="/everyone/15action/action09.html">おうち緑化しよう<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                      <li><a class="-everyone-green l-side__menu-link link-hover" href="/everyone/15action/action10.html">災害に強い家で暮らしを守ろう<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    </ul>
+                  </div>
+                <div class="l-side__menu-stack">
+                  <h3 class="l-side__menu-heading03"><span>4.</span>スポーツ・レジャーの適応</h3>
+                    <ul class="l-side__menu-list">
+                      <li><a class="-everyone-blue l-side__menu-link link-hover" href="/everyone/15action/action11.html">運動に最適な環境を選ぼう<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                      <li><a class="-everyone-blue l-side__menu-link link-hover" href="/everyone/15action/action12.html">運動時にクーリングをしよう<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                      <li><a class="-everyone-blue l-side__menu-link link-hover" href="/everyone/15action/action13.html">感染症予防のために虫除け対策をしよう<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                      <li><a class="-everyone-blue l-side__menu-link link-hover" href="/everyone/15action/action14.html">新しい旅の魅力に出会おう<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    </ul>
+                  </div>
+                  <div class="l-side__menu-stack">
+                  <h3 class="l-side__menu-heading03"><span>5.</span>その他の適応</h3>
+                    <ul class="l-side__menu-list">
+                      <li><a class="-everyone-purple l-side__menu-link link-hover" href="/everyone/15action/action15.html">適応しよう・参加しよう・シェアしよう<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    </ul>
+                  </div>
+                  <div class="l-side__menu-stack">
+                    <a href="/everyone/school/index.html">
+                      <h3 class="l-side__menu-heading03">A-PLAT KIDS</h3>
+                    </a>
+                  </div>
+              </div>  
+            </div>
+          </div>
+        </li>
+        <li class="l-side__nav-main-item"><a class="l-side__nav-main-link link-hover js-side-menu-trigger js-side-current" href="/data/index.html"><span class="l-side__nav-main-icon u-select-none"><img src="https://adaptation-platform.nies.go.jp/common/images/common/side-icon-03.svg" alt="" width="50" height="50"/></span>適応事例・データ<span class="link-hover-deco"></span></a>
+          <div class="l-side__menu js-side-menu">
+            <div class="l-side__menu-content"><a class="l-side__menu-close js-side-menu-close" href=""></a>
+              <h2 class="l-side__menu-heading02"><a class="c-arrow-link arrow-hover" href="/data/index.html"><span class="l-side__nav-main-icon u-select-none"><img src="https://adaptation-platform.nies.go.jp/common/images/common/side-icon-03.svg" alt="" width="50" height="50"/></span>適応事例・データ<span class="icon-body" aria-hidden="true"><span class="icon-wrap"><span class="icon">
+                <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+                </svg>
+                </span><span class="icon">
+                <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+                </svg>
+                </span><span class="icon">
+                <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+                </svg>
+                </span></span></span></a> </h2>
+              <div class="l-side__menu-flex">
+                <div class="l-side__menu-stack"><a href="/data/index.html#data01">
+                  <h3 class="l-side__menu-heading03">適応事例</h3>
+                  </a>
+                  <ul class="l-side__menu-list">
+                    <li><a class="l-side__menu-link link-hover" href="/data/measures/index.html">国内外の適応策事例集<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/data/interview/index.html">適応策インタビュー<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/private_sector/nature-positive/index.html">ネイチャーポジティブと<br>
+                      気候変動適応<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/data/research/index.html">研究紹介<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/private_sector/riskmgmt/index.html">気候リスク管理の事例<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/private_sector/opportunities/index.html">適応ビジネスの事例<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/private_sector/tcfd/index.html">TCFDに関する取組事例<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/infographic/index.html">インフォグラフィック（7分野編）<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/private_sector/infographic/index.html">インフォグラフィック（事業者編）<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                  </ul>
+                </div>
+                <div class="l-side__menu-stack"><a href="/data/index.html#data02">
+                  <h3 class="l-side__menu-heading03">気候変動の観測・予測データ</h3>
+                  </a>
+                  <ul class="l-side__menu-list">
+                    <li><a class="l-side__menu-link link-hover" href="https://adaptation-platform.nies.go.jp/data/jma-obs/index.html">気象観測データの長期変化の傾向<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="https://a-plat.nies.go.jp/aplat_amedas_viewer/index.html">気象観測データ閲覧ツール<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/webgis/index.html">気候変動の将来予測WebGIS<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/government/impact.html">気候変動による分野別影響＆適応<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/ccca/monitoring/phenology/index.html">国立環境研究所 市民調査員と連携した生物季節モニタリング<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/tools/e-learning/index.html">e-ラーニング 気候変動適応-影響・適応の基礎知識-<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/data/setosea.html">瀬戸内海の水環境への気候変動影響と将来予測<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/data/socioeconomic/index.html">社会経済シナリオに応じた市区町村別の将来の人口推計<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/external/nousui/index.html">気候変動の影響への適応に向けた将来展望ウェブ検索ツール<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/external/s-18/index.html">気候変動影響予測・適応評価の総合的研究（S-18）<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                  </ul>
+                </div>
+                <div class="l-side__menu-stack"><a href="/data/index.html#data03">
+                  <h3 class="l-side__menu-heading03">研究者・実務者向け情報</h3>
+                  </a>
+                  <ul class="l-side__menu-list">
+                    <li><a class="l-side__menu-link link-hover" href="/data/ia/index.html">気候変動影響評価報告書の引用文献<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/data/ref/index.html">学術誌論文<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/data/rep/index.html">梗概集、紀要等<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/data/stat/index.html">統計データ・白書等<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/ccca/institute/expert_review_team/data_list/index.html">気候変動関連データベース集<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover icon-link" href="https://diasjp.net/ds2022/" target="_blank">気候予測データセット2022及び解説書<span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/data/arcgis/index.html">WebGISによるデータ収集・共有・発信<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/data/open_sdm/index.html">生き物の分布推定ツールオープンSDM<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/private_sector/impacts_info/tool/h08_water_risk.html">H08水リスクツール<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover icon-link" href="https://ccca-scenario.nies.go.jp/" target="_blank">A-PLAT Pro<span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover icon-link" href="/moej/action_plan/index.html" target="_blank">気候変動適応における広域アクションプラン策定事業<span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover icon-link" href="/moej/conso/index.html" target="_blank">地域適応コンソーシアム事業<span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/data/observation_projection/index.html">気候変動影響観測・影響予測の研究事例 <span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/data/priority-tool/index.html">気候変動適応策選択ツール<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="l-side__nav-main-item"><a class="l-side__nav-main-link link-hover js-side-menu-close-trigger js-side-current" href="/tools/index.html"><span class="l-side__nav-main-icon u-select-none"><img src="https://adaptation-platform.nies.go.jp/common/images/common/side-icon-04.svg" alt="" width="50" height="50"/></span>普及啓発・<br>
+          学習ツール<span class="link-hover-deco"></span></a> </li>
+      </ul>
+    </nav>
+    <nav class="l-side__nav-sub">
+      <ul class="l-side__nav-sub-list">
+        <li class="l-side__nav-sub-item"><a class="l-side__nav-sub-link js-side-menu-trigger link-hover -color-white js-side-current" href="/local/index.html"><span class="l-side__nav-sub-icon"><img src="https://adaptation-platform.nies.go.jp/common/images/common/side-icon-05.svg" alt="" width="40" height="40"/></span><span class="l-side__nav-sub-icon -hover"><img src="https://adaptation-platform.nies.go.jp/common/images/common/side-icon-05-hover.svg" alt="" width="50" height="50"/></span>自治体・<br>
+          LCCACの方へ<span class="link-hover-deco -gray"></span></a>
+          <div class="l-side__menu js-side-menu">
+            <div class="l-side__menu-content">
+              <div class="l-side__menu-close js-side-menu-close"></div>
+              <h2 class="l-side__menu-heading02"><a class="c-arrow-link arrow-hover" href="/local/index.html"><span class="l-side__nav-sub-icon u-select-none"><img src="https://adaptation-platform.nies.go.jp/common/images/common/side-icon-05.svg" alt="" width="50" height="50"/></span>自治体・LCCACの方へ<span class="icon-body" aria-hidden="true"><span class="icon-wrap"><span class="icon">
+                <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+                </svg>
+                </span><span class="icon">
+                <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+                </svg>
+                </span><span class="icon">
+                <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+                </svg>
+                </span></span></span></a></h2>
+              <div class="l-side__menu-flex">
+                <div class="l-side__menu-stack"><a href="/local/sesaku/index.html">
+                  <h3 class="l-side__menu-heading03">1.施策の推進</h3>
+                  </a>
+				  <ul class="l-side__menu-list">
+                    <li><a class="l-side__menu-link link-hover" href="/local/sesaku/index.html#local-s-sesaku">国の施策<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/sesaku/index.html#local-s-plan">地域気候変動適応計画<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/sesaku/index.html#local-s-lccac">地域気候変動適応センター<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/sesaku/index.html#local-s-adaptation">適応策事例<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/sesaku/index.html#local-s-subsidy">補助金情報<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                  </ul>
+                </div>
+                <div class="l-side__menu-stack"><a href="/local/kagaku/index.html">
+                  <h3 class="l-side__menu-heading03">2.気候変動・適応に関する科学的知見</h3>
+                  </a>
+				  <ul class="l-side__menu-list">
+                    <li><a class="l-side__menu-link link-hover" href="/local/kagaku/index.html#local-k-material">収集・整理<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/kagaku/index.html#local-k-data">データ入手先<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/kagaku/index.html#local-k-research">調査研究<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/kagaku/index.html#local-k-gis">解析・発信<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/kagaku/index.html#local-k-conference">研究会・シンポジウム等<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/kagaku/index.html#local-k-subsidy">補助金情報<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                  </ul>
+                </div>
+                <div class="l-side__menu-stack"><a href="/local/hukyuu/index.html">
+                  <h3 class="l-side__menu-heading03">3.普及啓発・動画・イベント事例、ツール</h3>
+                  </a>
+				  <ul class="l-side__menu-list">
+                    <li><a class="l-side__menu-link link-hover" href="/local/hukyuu/index.html#local-h-fukyu">普及啓発<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/hukyuu/index.html#local-h-movie">気候変動関連動画<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/hukyuu/index.html#local-h-act">イベント・講演活動の事例<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                  </ul>
+                </div>
+                <div class="l-side__menu-stack"><a href="/local/renkei/index.html">
+                  <h3 class="l-side__menu-heading03">4.ステークホルダーとの連携（事業者・市民等）</h3>
+                  </a>
+				  <ul class="l-side__menu-list">
+                    <li><a class="l-side__menu-link link-hover" href="/local/renkei/index.html#local-r-biz">事業者に関連する情報<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/renkei/index.html#local-r-bizsupport">自治体による事業者支援事例<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/renkei/index.html#local-r-stakeholder">ステークホルダーとの連携推進<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/renkei/index.html#local-r-sanka">住民参加型の議論<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                  </ul>
+                </div>
+                <div class="l-side__menu-stack"><a href="/local/chishiki/index.html">
+                  <h3 class="l-side__menu-heading03">5.知識・スキルの習得</h3>
+                  </a>
+				  <ul class="l-side__menu-list">
+                    <li><a class="l-side__menu-link link-hover" href="/local/chishiki/index.html#local-c-info">自治体・LCCAC向け研修、情報共有等（CCCA主催）<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/chishiki/index.html#local-c-conference">シンポジウム・研修等<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/chishiki/index.html#local-c-el">e-ラーニング<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/chishiki/index.html#local-c-workbook">「市区町村を対象とした地域気候変動適応計画策定研修」の実施手引書<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/chishiki/index.html#local-c-movie">気候変動関連動画<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/chishiki/index.html#local-c-supportbook">気候変動適応新任者向けの手順書<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/local/chishiki/index.html#local-c-gis">情報発信ツール<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                  </ul>
+                </div>
+                <div class="l-side__menu-stack">
+                  <h3 class="l-side__menu-heading03">6.特設サイト・その他支援メニュー</h3>
+                  <ul class="l-side__menu-list">
+                    <li><a class="l-side__menu-link link-hover" href="/climate_change_adapt/heatstroke/index.html">熱中症関連情報<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/archive/event/index.html">A-PLATへのイベント掲載事例<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/ccca/outreach/index.html">講演会等への講師派遣事例<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/ccca/committee/index.html">検討会等への委員派遣事例<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/about/contact.html">お問い合わせ、よくあるご質問<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="l-side__nav-sub-item"><a class="l-side__nav-sub-link js-side-menu-trigger link-hover -color-white js-side-current" href="/private_sector/index.html"><span class="l-side__nav-sub-icon"><img src="https://adaptation-platform.nies.go.jp/common/images/common/side-icon-06.svg" alt="" width="40" height="40"/></span><span class="l-side__nav-sub-icon -hover"><img src="https://adaptation-platform.nies.go.jp/https://adaptation-platform.nies.go.jp/common/images/common/side-icon-06-hover.svg" alt="" width="50" height="50"/></span>事業者の方へ<span class="link-hover-deco -gray"></span></a>
+          <div class="l-side__menu js-side-menu">
+            <div class="l-side__menu-content">
+              <div class="l-side__menu-close js-side-menu-close"></div>
+              <h2 class="l-side__menu-heading02"><a class="c-arrow-link arrow-hover" href="/private_sector/index.html"><span class="l-side__nav-sub-icon u-select-none"><img src="https://adaptation-platform.nies.go.jp/common/images/common/side-icon-06.svg" alt="" width="50" height="50"/></span>事業者の方へ<span class="icon-body" aria-hidden="true"><span class="icon-wrap"><span class="icon">
+                <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+                </svg>
+                </span><span class="icon">
+                <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+                </svg>
+                </span><span class="icon">
+                <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+                </svg>
+                </span></span></span></a></h2>
+              <div class="l-side__menu-flex">
+                <div class="l-side__menu-stack">
+                  <h3 class="l-side__menu-heading03">1. 情報・資料</h3>
+                  <ul class="l-side__menu-list">
+                    <li><a class="l-side__menu-link link-hover" href="/private_sector/guide/index.html">民間企業の気候変動適応ガイド<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/private_sector/resources/index.html">事業者の適応に関する参考資料<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/private_sector/impacts_info/index.html">影響評価情報<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/private_sector/infographic/index.html">インフォグラフィック（事業者編）<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/private_sector/adaptation_finance/index.html">適応ファイナンス<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/private_sector/nature-positive/index.html">ネイチャーポジティブと気候変動適応<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                  </ul>
+                </div>
+                <div class="l-side__menu-stack">
+                  <h3 class="l-side__menu-heading03">2. 取組事例</h3>
+                  <ul class="l-side__menu-list">
+                    <li><a class="l-side__menu-link link-hover" href="/private_sector/riskmgmt/index.html">気候リスク管理の事例<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/private_sector/tcfd/index.html">TCFDに関する取組事例<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/private_sector/opportunities/index.html">適応ビジネスの事例<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/data/measures/index.html">国内外の適応策事例集<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                    <li><a class="l-side__menu-link link-hover" href="/data/interview/index.html">適応策インタビュー<span class="arrow"></span><span class="link-hover-deco -gray"></span></a></li>
+                  </ul>
+                </div>
+                <div class="l-side__menu-stack"><a href="/moej/tcfd-scenario-analysis/index.html">
+                  <h3 class="l-side__menu-heading03">3. 気候変動リスク分析情報サイト</h3>
+                  </a> </div>
+                <div class="l-side__menu-stack"><a href="/private_sector/risk_network/index.html">
+                  <h3 class="l-side__menu-heading03">4. 気候変動リスク産官学連携ネットワーク</h3>
+                  </a> </div>
+                <div class="l-side__menu-stack"><a href="/private_sector/scenario_data/index.html">
+                  <h3 class="l-side__menu-heading03">5. 気候変動リスク・機会の評価等に向けたシナリオ・データ関係機関懇談会</h3>
+                  </a> </div>
+                <div class="l-side__menu-stack"><a href="/local/renkei/business_support.html">
+                  <h3 class="l-side__menu-heading03">6. 自治体による事業者支援事例</h3>
+                  </a> </div>
+                <div class="l-side__menu-stack"><a href="/private_sector/events/index.html">
+                  <h3 class="l-side__menu-heading03">7. イベント情報</h3>
+                  </a> </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <div class="l-side__nav-links"><a class="c-arrow-link arrow-hover link-hover js-side-current" href="/about/index.html">A-PLATについて<span class="icon-body" aria-hidden="true"><span class="icon-wrap"><span class="icon">
+      <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+      </svg>
+      </span><span class="icon">
+      <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+      </svg>
+      </span><span class="icon">
+      <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+      </svg>
+      </span></span></span><span class="link-hover-deco"></span></a><a class="c-arrow-link arrow-hover link-hover js-side-current" href="/ccca/index.html">CCCAの活動・アーカイブ<span class="icon-body" aria-hidden="true"><span class="icon-wrap"><span class="icon">
+      <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+      </svg>
+      </span><span class="icon">
+      <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+      </svg>
+      </span><span class="icon">
+      <svg width="16" height="6" viewBox="0 0 16 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 5H14L10.6061 1" stroke="#2A2D32"/>
+      </svg>
+      </span></span></span><span class="link-hover-deco"></span></a> </div>
+    <div class="l-side__search">
+      <form action="/search.html" method="get">
+        <label class="l-side__search-label">サイト内検索</label>
+        <input class="l-side__search-input" type="text" name="query"/>
+        <button class="l-side__search-btn" type="submit">
+        <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="8.5" cy="8.5" r="7.75" stroke="black" stroke-width="1.5"/>
+          <path d="M12.9199 14.6148L16.7199 19.23" stroke="black" stroke-width="1.5" stroke-miterlimit="10"/>
+        </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</aside>
+
+</body>
+</html>

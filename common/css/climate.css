@@ -643,3 +643,83 @@
 	}
 }
 /*# sourceMappingURL=../../_cache/_maps/climate.css.map */
+
+
+
+/* 基本的なフォントと背景色の設定 */
+
+/* コンテンツラッパーのスタイリング */
+.content-wrapper-afafaf {
+    /* 1. 最大横幅を900pxに設定 */
+    max-width: 900px;
+    
+    /* 2. レスポンシブ対応 */
+    /* 画面幅が900px以下の場合は、左右に5%の余白を設けます */
+    width: 90%; 
+    
+    /* 3. 中央配置 */
+    /* 上下に40px、左右に自動（auto）で余白を設定し、中央に配置します */
+    margin: 40px auto; 
+    
+    /* 読みやすさのための内側余白 */
+    padding: 20px 40px; /* PC表示時の内側余白 */
+    background-color: #ffffff; /* コンテンツ領域の背景を白に */
+    border-radius: 8px; /* 角を少し丸めます */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* わずかに影をつけます */
+
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    line-height: 1.7; /* 行間を広めに設定し、読みやすくします */
+    background-color: #f9f9f9; /* 背景色を白に近いグレーに */
+    color: #333; /* 文字色を濃いグレーに */
+}
+
+/* 見出しのスタイリング */
+.content-wrapper-afafaf h2 {
+    font-size: 3.8rem; /* h2のフォントサイズ */
+    border-bottom: 2px solid #eee; /* 下線を追加 */
+    padding-bottom: 10px;
+    margin-top: 40px; /* 見出しの上のマージン */
+    margin-bottom: 20px; /* 見出しの下のマージン */
+}
+
+/* 最初のh2要素の上マージンは不要なため削除 */
+.content-wrapper-afafaf h2:first-of-type {
+    margin-top: 0;
+}
+
+.content-wrapper-afafaf h3{font-size: 2.4rem;    padding-bottom: 10px;
+    margin-top: 40px; /* 見出しの上のマージン */
+    margin-bottom: 20px; /* 見出しの下のマージン */}
+
+/* 段落のスタイリング */
+.content-wrapper-afafaf p {
+font-size:1.2em;
+    margin-bottom: 1.7em; /* 段落間のマージン */
+}
+
+/* リンクやその他の要素のスタイリング（必要に応じて追加） */
+.content-wrapper-afafaf a {
+
+    text-decoration: underline;
+}
+
+.content-wrapper-afafaf a:hover {
+    text-decoration: underline;
+}
+
+/* スマートフォン向けの調整 (メディアクエリ) */
+@media (max-width: 600px) {
+    .content-wrapper {
+        width: 95%; /* スマートフォンでは余白をさらに狭く */
+        padding: 15px 20px; /* 内側の余白も狭く */
+        margin: 20px auto; /* 上下の余白も調整 */
+    }
+
+    h2 {
+        font-size: 1.5rem; /* スマートフォンでは見出しを少し小さく */
+    }
+
+    p {
+        font-size: 1rem; /* スマートフォンでは本文も少し小さく */
+    }
+}

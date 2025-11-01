@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <title>COSMOS | 知を纏う。思考の深淵へ、好奇心の先へ。</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0V4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        .large-feature {
+            position: relative; /* 子要素のvideoを絶対配置するための基準点 */
+            overflow: hidden; /* はみ出した動画を非表示にする */
+            display: flex; /* コンテンツを中央に配置する場合 */
+            justify-content: center;
+            align-items: center;
+            color: white; /* テキストの色を白に（動画に合わせて変更してください） */
+        }
+        .large-feature .bg-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 1; /* コンテンツの背景に配置 */
+        }
+        .large-feature .content-overlay {
+            position: relative; /* videoより手前に表示させるため */
+            z-index: 2;
+            padding: 20px; /* コンテンツの余白 */
+            background-color: rgba(0, 0, 0, 0.4); /* テキストの可読性を上げるための半透明の背景 */
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .large-feature a {
+          color: inherit; /* 親要素の色を継承 */
+          text-decoration: none;
+        }
+
+        .medium-feature {
+            position: relative;
+            overflow: hidden;
+            background-image: url(img/dam-5422929_640.jpg);
+            min-height:300px;
+        }
+    </style>
+    </head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <span class="logo-icon">Alt.</span>
+                    <span class="logo-text">A-PLAT</span>
+                </div>
+                <p class="tagline"> #適応 について考える人のために</p>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#">ホーム</a></li>
+                    <li><a href="article.html">コラム</a></li>
+                    <li><a href="article.html">特集</a></li>
+                    <li><a href="article.html">データ</a></li>
+                    <li><a href="article.html">ABOUT</a></li>
+                </ul>
+            </nav>
+            <div class="header-right">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </header>
+
+        <main class="main-grid movie_blk">
+
+            <div class="grid-item large-feature">
+                <video src="img/232561_tiny.mp4" class="bg-video" autoplay loop muted playsinline></video>
+                <div class="content-overlay">
+                    <a href="article.html">
+                        <p class="category" style="color: aliceblue;">農・林・水産業</p>
+                        <h2>畜産、水産業</h2>
+                        <p class="excerpt" style="color: aliceblue;">DXをからめた、データセットを世界中で整備し、気候変動に適応した農業</p>
+                        <button class="read-more-btn">詳細を見る</button>
+                    </a>
+                </div>
+            </div>
+            <div class="grid-item medium-feature">
+                <a href="article.html">
+                    <h3>水環境・水資源（水需要）</h3>
+                    <p class="sub-text">湖沼・ダム湖、河川、沿岸域及び閉鎖性海域</p>
+                    
+                </a>
+            </div>
+
+            <div class="grid-item small-box">
+                <a href="article.html">
+                    <h4>湖沼・ダム湖への影響</h4>
+                    <img src="img/lake-kawaguchiko-7412585_640.jpg" alt="科学に関するグラフ" class="item-graphic">
+                </a>
+            </div>
+            
+            <div class="grid-item small-box">
+                <a href="article.html">
+                    <h4>水供給量の変化</h4>
+                    <img src="img/dam-5422929_640.jpg" alt="図書館の風景" class="item-image">
+                </a>
+            </div>
+
+            <div class="grid-item small-box">
+                <a href="article.html">
+                    <h4>自然生態系</h4>
+                    <img src="img/infographic.png" alt="風景写真" class="item-image">
+                </a>
+            </div>
+
+            <div class="grid-item small-box">
+                <a href="article.html">
+                    <h4>自然災害・沿岸域</h4>
+                    <img src="img/river-6017339_640.jpg" alt="アート作品" class="item-image ">
+                </a>
+            </div>
+
+            <div class="grid-item small-box">
+                <a href="article.html">
+                    <h4>経済と未来</h4>
+                    
+                    <img src="img/father-6648076_640.jpg" alt="経済に関するイメージ" class="item-image">
+                    
+                </a>
+            </div>
+            
+            <div class="grid-item small-box">
+                <a href="art">
+                    <p class="category">健康</p>
+                    <h4>熱中症と感染症増加</h4>
+                    <p class="sub-text">「脆弱性の高い集団」といわれる、高齢者、乳幼児、基礎疾患有病者に対する対応</p>
+                </a>
+            </div>
+
+          
+        </main>
+
+        <section class="newsletter-section">
+            <h3 class="newsletter-title">Newsletter Soup</h3>
+            <form class="newsletter-form">
+                <input type="email" placeholder="メールアドレスを入力" class="newsletter-input">
+                <button type="submit" class="newsletter-submit-btn">登録</button>
+            </form>
+        </section>
+    </div>
+
+    <script src="js/script.js"></script>
+
+    <style>
+        /* チャットボット全体のスタイル */
+        .gemini-chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        /* チャットを開くボタン */
+        #chatbot-toggle-button {
+            background-color: #4A80F5; /* Googleカラー */
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            transition: transform 0.2s;
+        }
+        #chatbot-toggle-button:hover {
+            transform: scale(1.1);
+        }
+
+        /* チャットウィジェット本体 */
+        #chatbot-widget {
+            display: none; /* 初期状態は非表示 */
+            flex-direction: column;
+            width: 350px;
+            height: 500px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            overflow: hidden;
+            position: absolute;
+            bottom: 80px; /* ボタンの上に配置 */
+            right: 0;
+        }
+        #chatbot-widget.open {
+            display: flex;
+        }
+
+        /* ヘッダー */
+        .chatbot-header {
+            background-color: #f1f3f4;
+            padding: 15px;
+            font-weight: 500;
+            font-size: 16px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* メッセージ表示エリア */
+        .chatbot-messages {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #ffffff;
+        }
+        .message {
+            margin-bottom: 12px;
+            padding: 8px 12px;
+            border-radius: 18px;
+            max-width: 80%;
+            line-height: 1.5;
+        }
+        .message.user {
+            background-color: #dcedff;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        .message.bot {
+            background-color: #f1f3f4;
+            align-self: flex-start;
+        }
+        .message-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 入力フォーム */
+        .chatbot-input-form {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+        #chatbot-input {
+            flex-grow: 1;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 10px 15px;
+            font-size: 14px;
+            margin-right: 10px;
+            outline: none;
+        }
+        #chatbot-input:focus {
+            border-color: #4A80F5;
+        }
+        #chatbot-send-btn {
+            background-color: #4A80F5;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+    </style>
+
+    <div class="gemini-chatbot">
+        <div id="chatbot-widget">
+            <div class="chatbot-header">
+                AIチャット
+            </div>
+            <div class="chatbot-messages" id="chatbot-messages">
+                <div class="message-container">
+                    <div class="message bot">
+                        こんにちは！何かお手伝いできることはありますか？
+                    </div>
+                </div>
+            </div>
+            <form class="chatbot-input-form" id="chatbot-form">
+                <input type="text" id="chatbot-input" placeholder="メッセージを入力..." autocomplete="off">
+                <button type="submit" id="chatbot-send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+
+        <button id="chatbot-toggle-button">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButton = document.getElementById('chatbot-toggle-button');
+            const widget = document.getElementById('chatbot-widget');
+            const form = document.getElementById('chatbot-form');
+            const input = document.getElementById('chatbot-input');
+            const messagesContainer = document.getElementById('chatbot-messages');
+
+            // チャットウィジェットの表示・非表示を切り替え
+            toggleButton.addEventListener('click', function() {
+                widget.classList.toggle('open');
+            });
+
+            // フォーム送信時の処理
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // ページのリロードを防ぐ
+                const userMessage = input.value.trim();
+
+                if (userMessage) {
+                    // ユーザーのメッセージを表示
+                    addMessage(userMessage, 'user');
+                    input.value = ''; // 入力欄をクリア
+                    
+                    // ボットの応答をシミュレート
+                    simulateBotResponse(userMessage);
+                }
+            });
+
+            // メッセージをチャットに追加する関数
+            function addMessage(text, type) {
+                const messageContainer = document.createElement('div');
+                messageContainer.className = 'message-container';
+
+                const messageElement = document.createElement('div');
+                messageElement.className = `message ${type}`;
+                messageElement.textContent = text;
+                
+                messageContainer.appendChild(messageElement);
+                messagesContainer.appendChild(messageContainer);
+
+                // 自動で一番下までスクロール
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+
+            // ボットの応答をシミュレートする関数
+            function simulateBotResponse(userMessage) {
+                // ここにGemini APIとの連携処理を実装します
+                // const response = await callGeminiAPI(userMessage);
+                // addMessage(response, 'bot');
+
+                // 以下はダミーの応答です
+                setTimeout(() => {
+                    addMessage('ご質問ありがとうございます。現在、AIが回答を準備しています。', 'bot');
+                }, 1000);
+            }
+        });
+    </script>
+    </body>
+</html>
