@@ -52,3 +52,23 @@ $(function(){
     }
   });
 })();
+
+document.addEventListener("DOMContentLoaded", function() {
+    const fadeElements = document.querySelectorAll('.scroll-fade-in');
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target); // 一度表示されたら監視をやめる
+            }
+        });
+    }, {
+        rootMargin: '0px',
+        threshold: 0.2 // 画像の20%が見えたら発火
+    });
+
+    fadeElements.forEach(element => {
+        observer.observe(element);
+    });
+});

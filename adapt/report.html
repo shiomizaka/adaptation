@@ -98,6 +98,19 @@
         transform: translateY(100%);
         opacity: 0;
     }
+
+    .scroll-fade-in img {
+    width: 100%;
+    height: auto;
+    opacity: 0; /* 初期状態では非表示 */
+    transform: translateY(20px); /* 少し下にずらしておく */
+    transition: opacity 1s ease-out, transform 1s ease-out; /* アニメーション設定 */
+}
+
+.scroll-fade-in.is-visible img {
+    opacity: 1; /* 表示状態 */
+    transform: translateY(0); /* 元の位置に戻す */
+}
 </style>
 
 
@@ -385,7 +398,9 @@
 <p>
 しかし、晴天が適温ではなく高温になりすぎるとでんぷん合成機能に障害が出てしまい、白未熟粒や胴割粒が発生する。
 </p>
+<div class="scroll-fade-in">
 <img src="../img/agri-01.jpg" style="margin:2rem 0 4rem;">
+</div>
 <p>収穫量については、一部地域では既に収穫量の低下が見られる。例えば気候変動が現在より+2℃におさまり、変動が緩和される場合には東北地方の生産額は高まるが、緩和されない＋４℃の上昇の場合は低下する研究がある。この研究によると、気温１℃の上昇があると、東北で70億円の損失が生じる。九州では+2℃の上昇でも収穫量は低下し、1℃の気温上昇で120億円の損失額となる。<br />
 別のリサーチでは各種気候シナリオと市町村のパネルデータを用いて全国都道府県単位でのシミュレーションを行ったが、北海道、中国地方を除くエリアでは軒並み収穫量が低下した。</p>
 <p>
