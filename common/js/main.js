@@ -1,6 +1,6 @@
 "use strict";document.addEventListener("DOMContentLoaded",function(){
 // ▼次の行を書き換えてください。▼
-var a=location.origin+"/template-parts/";
+var a=location.origin+"https://adaptation-platform.nies.go.jp/template-parts/";
 // ▲上の行を書き換えてください。 ▲
 //const basePath = location.origin + "/aplat_internal/html/template-parts-internal/";
 //console.log(location.origin);
