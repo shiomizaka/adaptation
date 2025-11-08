@@ -1,0 +1,41 @@
+/* ============================================== */
+/* テーマ切り替えボタンのスタイル */
+/* ============================================== */
+
+.theme-toggle-button {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border-dark);
+    border-radius: 50%; /* 丸いボタン */
+    width: 36px; /* サイズ調整 */
+    height: 36px; /* サイズ調整 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem; /* アイコンサイズ調整 */
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    padding: 0;
+    line-height: 1;
+    margin-right: 10px; /* 検索ボタンとの間隔 */
+}
+
+.theme-toggle-button:hover {
+    background-color: var(--color-accent-hover);
+    color: var(--color-bg-secondary); /* ホバー時のアイコン色 */
+    border-color: var(--color-accent-hover);
+}
+
+/* アイコンの表示/非表示制御 */
+.theme-toggle-button .dark-icon {
+    display: none; /* デフォルト（ライトテーマ）では非表示 */
+}
+
+html.dark-theme .theme-toggle-button .light-icon {
+    display: none; /* ダークテーマではライトアイコンを非表示 */
+}
+
+html.dark-theme .theme-toggle-button .dark-icon {
+    display: inline-block; /* ダークテーマではダークアイコンを表示 */
+}

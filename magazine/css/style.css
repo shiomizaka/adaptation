@@ -5,32 +5,104 @@
     box-sizing: border-box;
 }
 
+/* ============================================== */
+/* CSS変数 (テーマ定義) */
+/* ============================================== */
+:root {
+    /* ライトテーマの変数 */
+    --color-bg-primary: #f0f2f5;
+    --color-bg-secondary: #ffffff;
+    --color-bg-container: #ffffff;
+    --color-bg-header: #ffffff;
+    --color-bg-newsletter: #f0f2f5;
+    --color-bg-input: #ffffff;
+    --color-bg-grid-item: #f9f9f9;
+    --color-bg-grid-item-hover: #ffffff;
+    --color-bg-accent: #007bff;
+    --color-bg-accent-hover: #0056b3;
+    
+    --color-text-primary: #222222;
+    --color-text-secondary: #555555;
+    --color-text-tagline: #777777;
+    --color-text-accent: #007bff;
+    --color-text-on-accent: #ffffff;
+    --color-text-placeholder: #999999;
+    
+    --color-border: #dddddd;
+    --color-border-input: #cccccc;
+    
+    --color-shadow: rgba(0, 0, 0, 0.05);
+
+    /* グラデーション (ライト) */
+    --gradient-bg: linear-gradient(to bottom, #e0e8f0, #ffffff);
+}
+
+html.dark-theme {
+    /* ダークテーマの変数 */
+    --color-bg-primary: #121212;
+    --color-bg-secondary: #1e1e1e;
+    --color-bg-container: #222222;
+    --color-bg-header: #222222;
+    --color-bg-newsletter: #333333;
+    --color-bg-input: #444444;
+    --color-bg-grid-item: #333333;
+    --color-bg-grid-item-hover: #444444;
+    --color-bg-accent: #00bcd4;
+    --color-bg-accent-hover: #00a0b8;
+    
+    --color-text-primary: #e0e0e0;
+    --color-text-secondary: #aaaaaa;
+    --color-text-tagline: #aaaaaa;
+    --color-text-accent: #00bcd4;
+    --color-text-on-accent: #1a1a1a;
+    --color-text-placeholder: #aaaaaa;
+    
+    --color-border: #333333;
+    --color-border-input: #555555;
+    
+    --color-shadow: rgba(0, 0, 0, 0.5);
+
+    /* グラデーション (ダーク) */
+    --gradient-bg: linear-gradient(to bottom, #1E3D59, #0B2533);
+}
+
+/* ============================================== */
+/* 基本スタイル (CSS変数適用) */
+/* ============================================== */
+
 body {
     font-family: 'Noto Sans JP', sans-serif;
-    background-color: #1a1a1a; /* ダークな背景 */
-    color: #e0e0e0; /* 明るいテキスト */
+    color: var(--color-text-primary);
     line-height: 1.6;
     display: flex;
-    justify-content: center; /* ページ全体を中央寄せ */
-    padding: 20px; /* 全体的な余白 */
-    min-height: 100vh; /* 縦方向の中央寄せのため */
+    justify-content: center;
+    padding: 20px;
+    min-height: 100vh;
+    
+    background: var(--gradient-bg); /* グラデーション背景適用 */
+    background-size: cover;
+    background-attachment: fixed;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 a {
-    color: #e0e0e0;
+    color: var(--color-text-accent);
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 a:hover {
-    color: #ffffff;
+    color: var(--color-text-accent-hover);
 }
 
+/* index.html / article.html 共通 */
 .container {
-    width: 1200px; /* 固定幅の指定 (デスクトップ向け) */
-    max-width: 100%; /* 小さな画面では100%になるように */
-    background-color: #222222; /* コンテナの背景色 */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    width: 1200px;
+    max-width: 100%;
+    background-color: var(--color-bg-container);
+    box-shadow: 0 0 20px var(--color-shadow);
     padding: 30px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* ヘッダー */
@@ -39,8 +111,9 @@ a:hover {
     justify-content: space-between;
     align-items: center;
     padding-bottom: 20px;
-    border-bottom: 1px solid #333333;
+    border-bottom: 1px solid var(--color-border);
     margin-bottom: 30px;
+    transition: border-color 0.3s ease;
 }
 
 .header-left {
@@ -54,18 +127,18 @@ a:hover {
     font-size: 28px;
     font-weight: 700;
     margin-right: 15px;
-    white-space: nowrap; /* ロゴの折り返しを防ぐ */
+    white-space: nowrap;
+    color: var(--color-text-primary); /* ロゴテキスト色 */
 }
 
 .logo-icon {
-    color: #00bcd4; /* アクセントカラー */
-    margin-right: 8px;
+    color: var(--color-text-accent); /* アクセントカラー */
 }
 
 .tagline {
     font-size: 14px;
-    color: #aaaaaa;
-    white-space: nowrap; /* 折り返しを防ぐ */
+    color: var(--color-text-tagline);
+    white-space: nowrap;
 }
 
 .nav ul {
@@ -77,96 +150,94 @@ a:hover {
 .nav a {
     font-weight: 500;
     font-size: 15px;
-    transition: color 0.3s ease;
+    color: var(--color-text-secondary); /* ナビリンク色 */
+}
+.nav a:hover {
+    color: var(--color-text-primary);
 }
 
 .search-btn {
     background: none;
     border: none;
-    color: #e0e0e0;
+    color: var(--color-text-primary);
     font-size: 20px;
     cursor: pointer;
     transition: color 0.3s ease;
 }
 
 .search-btn:hover {
-    color: #ffffff;
+    color: var(--color-text-accent);
 }
 
-/* メイングリッド */
+/* メイングリッド (index.html) */
 .main-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4カラム */
-    grid-template-rows: auto; /* コンテンツに応じて自動調整 */
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
     gap: 20px;
     margin-bottom: 40px;
 }
 
 .grid-item {
-    background-color: #333333;
+    background-color: var(--color-bg-grid-item);
     padding: 25px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-    min-height: 150px; /* 最小の高さ */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* コンテンツの配置 */
-}
-
-.grid-item:hover {
-    background-color: #444444;
-}
-
-.grid-item a {
-    display: flex;
-    flex-direction: column;
-    height: 100%; /* 親要素の高さに合わせる */
-}
-
-/* large-feature (一番大きい記事) */
-.large-feature {
-    grid-column: span 2; /* 2カラム分 */
-    grid-row: span 2; /* 2行分 */
-    background-color: #00bcd4; /* アクセントカラー */
-    color: #1a1a1a;
-    padding: 40px;
+    min-height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.large-feature:hover {
-    background-color: #00a0b8; /* ホバーで少し暗く */
+.grid-item:hover {
+    background-color: var(--color-bg-grid-item-hover);
 }
 
+.grid-item a {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: var(--color-text-primary); /* グリッド内のリンク色 */
+}
+.grid-item a:hover {
+    color: var(--color-text-primary);
+}
+
+/* large-feature (動画背景のテキストはインラインで白指定) */
+.large-feature {
+    grid-column: span 2;
+    grid-row: span 2;
+    padding: 0; /* paddingはcontent-overlayで */
+    color: #ffffff; /* 動画上のテキストは白固定 */
+}
+.large-feature .content-overlay {
+    background-color: rgba(0, 0, 0, 0.4); /* これは固定 */
+}
 .large-feature a {
-    color: #1a1a1a;
+    color: #ffffff !important; /* 強制的に白 */
 }
-
 .large-feature .category {
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 10px;
-    color: rgba(26, 26, 26, 0.7);
+    color: #eeeeee;
 }
-
 .large-feature h2 {
     font-size: 38px;
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 20px;
+    color: #ffffff;
 }
-
 .large-feature .excerpt {
     font-size: 16px;
     line-height: 1.6;
-    margin-bottom: auto; /* 下に押しやる */
-    color: rgba(26, 26, 26, 0.85);
+    margin-bottom: auto;
+    color: #eeeeee;
 }
-
 .large-feature .read-more-btn {
-    background-color: #1a1a1a;
-    color: #e0e0e0;
+    background-color: var(--color-bg-accent);
+    color: var(--color-text-on-accent);
     border: none;
     padding: 12px 25px;
     border-radius: 5px;
@@ -174,90 +245,81 @@ a:hover {
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    align-self: flex-start; /* 左寄せ */
+    align-self: flex-start;
     margin-top: 30px;
 }
-
 .large-feature .read-more-btn:hover {
-    background-color: #444444;
+    background-color: var(--color-bg-accent-hover);
 }
 
-/* medium-feature (中くらいの特徴記事) */
+/* medium-feature (背景画像あり) */
 .medium-feature {
-    grid-column: span 2; /* 2カラム分 */
-    background-color: #444444;
+    grid-column: span 2;
     padding: 30px;
+    color: #ffffff; /* 背景画像上のため白固定 */
 }
-
-.medium-feature:hover {
-    background-color: #555555;
-}
-
 .medium-feature h3 {
     font-size: 24px;
     font-weight: 700;
     line-height: 1.3;
     margin-bottom: 10px;
+    color: #ffffff;
 }
-
 .medium-feature .sub-text {
     font-size: 14px;
-    color: #aaaaaa;
+    color: #eeeeee;
 }
 
-/* small-box (小さな記事ブロック) */
+/* small-box */
 .small-box {
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
-
 .small-box h4 {
     font-size: 18px;
     font-weight: 500;
     margin-bottom: 15px;
     z-index: 10;
-    color: #ffffff;
+    color: var(--color-text-primary);
 }
-
 .small-box .item-image,
 .small-box .item-graphic {
     width: 100%;
     height: auto;
     border-radius: 3px;
-    margin-top: auto; /* 下部に寄せる */
-    opacity: 0.8;
+    margin-top: auto;
+    opacity: 0.9; /* 少し透明度を上げる */
     transition: opacity 0.3s ease;
 }
-
 .small-box:hover .item-image,
 .small-box:hover .item-graphic {
     opacity: 1;
 }
-
 .small-box .category {
     font-size: 12px;
     font-weight: 400;
-    color: #888888;
+    color: var(--color-text-secondary);
     margin-bottom: 5px;
+}
+.small-box .sub-text {
+    font-size: 14px;
+    color: var(--color-text-secondary);
 }
 
 /* ニュースレターセクション */
 .newsletter-section {
-    background-color: #333333;
+    background-color: var(--color-bg-newsletter);
     padding: 30px;
     border-radius: 5px;
     text-align: center;
     margin-top: 40px;
+    transition: background-color 0.3s ease;
 }
-
 .newsletter-title {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 20px;
+    color: var(--color-text-primary);
 }
-
 .newsletter-form {
     display: flex;
     justify-content: center;
@@ -265,24 +327,22 @@ a:hover {
     max-width: 500px;
     margin: 0 auto;
 }
-
 .newsletter-input {
     flex-grow: 1;
     padding: 12px 15px;
-    border: 1px solid #555555;
-    background-color: #444444;
-    color: #e0e0e0;
+    border: 1px solid var(--color-border-input);
+    background-color: var(--color-bg-input);
+    color: var(--color-text-primary);
     border-radius: 5px;
     font-size: 16px;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
-
 .newsletter-input::placeholder {
-    color: #aaaaaa;
+    color: var(--color-text-placeholder);
 }
-
 .newsletter-submit-btn {
-    background-color: #00bcd4; /* アクセントカラー */
-    color: #1a1a1a;
+    background-color: var(--color-bg-accent);
+    color: var(--color-text-on-accent);
     border: none;
     padding: 12px 25px;
     border-radius: 5px;
@@ -291,525 +351,526 @@ a:hover {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
 .newsletter-submit-btn:hover {
-    background-color: #00a0b8;
+    background-color: var(--color-bg-accent-hover);
 }
 
-/* アイコンのスタイル調整 (Font Awesome) */
+/* アイコン */
 .fa-search {
     vertical-align: middle;
 }
-
-/* 画像のプレースホルダーの調整 */
 .item-image, .item-graphic {
-    object-fit: cover; /* 画像の比率を保ちつつ、ボックスに収める */
+    object-fit: cover;
 }
 
-
-/* 既存のCSSと結合するか、上書きする */
-.grid-item.small-box {
-    /* 既存のスタイルを維持しつつ、以下を追加・修正 */
-    width: 100%; /* 親要素の幅に合わせる（必要であれば） */
-    padding-top: 100%; /* 正方形にする */
+/* index.html の .grid-item.small-box の正方形化 */
+.main-grid .grid-item.small-box {
+    width: 100%;
+    padding-top: 100%; 
     position: relative;
     overflow: hidden;
-    /* その他の既存スタイル */
+    padding: 0; /* paddingをリセット */
 }
-
-.grid-item.small-box img {
+.main-grid .grid-item.small-box a {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* これがクロップの核心 */
-    object-position: center; /* 中央を基準にクロップ */
+    padding: 20px; /* パディングをaタグ側に移動 */
+}
+.main-grid .grid-item.small-box img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 1;
+    opacity: 0.7;
+}
+.main-grid .grid-item.small-box:hover img {
+    opacity: 0.8;
+}
+.main-grid .grid-item.small-box a > * {
+    position: relative; /* テキストやカテゴリを画像より手前に */
+    z-index: 2;
 }
 
+/* ------------------------------------ */
+/* article.html 用のスタイル (CSS変数適用) */
+/* ------------------------------------ */
+.article-main {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+.article-content-wrapper {
+    flex: 3;
+    max-width: 65%;
+}
+.main-article {
+    background-color: transparent; /* コンテナの背景色を継承 */
+    padding: 0;
+    border-radius: 5px;
+}
+.article-category {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-text-accent);
+    margin-bottom: 15px;
+    display: block;
+}
+.article-title {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--color-text-primary);
+}
+.article-excerpt {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin-bottom: 30px;
+}
+.main-article .read-more-btn {
+    background-color: var(--color-bg-accent);
+    color: var(--color-text-on-accent);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: flex-start;
+    margin-top: 0;
+    margin-bottom: 50px;
+}
+.main-article .read-more-btn:hover {
+    background-color: var(--color-bg-accent-hover);
+}
+.article-visual {
+    margin-bottom: 40px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+.article-main-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 5px;
+}
+.article-body {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--color-text-primary);
+}
+.article-body h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 50px;
+    margin-bottom: 25px;
+    color: var(--color-text-primary);
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 10px;
+}
+.article-body h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: var(--color-text-primary);
+    border-left: 5px solid var(--color-text-accent);
+    padding-left: 15px;
+}
+.article-body p {
+    margin-bottom: 20px;
+}
 
-.gemini-chatbot
-{color: black;}
+/* サイドバー (article.html) */
+.sidebar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 35%;
+}
+.sidebar-block {
+    background-color: var(--color-bg-grid-item);
+    padding: 25px;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px var(--color-shadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.sidebar-block.medium-feature {
+    background-color: var(--color-bg-grid-item-hover);
+}
+.sidebar-block.medium-feature h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: var(--color-text-primary);
+}
+.sidebar-block.medium-feature a:hover h3 {
+    color: var(--color-text-accent);
+}
+.sidebar-block.medium-feature .sub-text {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+}
+.small-box-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
+}
+.small-box-group .grid-item.small-box {
+    background-color: var(--color-bg-grid-item);
+    padding: 20px;
+    min-height: auto;
+    position: relative; /* 正方形化を解除 */
+    padding-top: 0;
+}
+.small-box-group .grid-item.small-box img {
+    position: static; /* 絶対配置を解除 */
+    height: 100px; /* 高さを固定 */
+    width: 100%;
+    object-fit: cover;
+    margin-top: 15px;
+    opacity: 0.9;
+}
+.small-box-group .grid-item.small-box h4 {
+    font-size: 16px;
+    margin-bottom: 0;
+    position: static;
+    color: var(--color-text-primary);
+}
+
+/* ------------------------------------ */
+/* チャットボットのテーマ適用 */
+/* ------------------------------------ */
+.gemini-chatbot {
+    color: var(--color-text-primary);
+}
+#chatbot-widget {
+    background-color: var(--color-bg-secondary);
+    box-shadow: 0 5px 15px var(--color-shadow);
+}
+.chatbot-header {
+    background-color: var(--color-bg-primary);
+    border-bottom: 1px solid var(--color-border);
+}
+.chatbot-messages {
+    background-color: var(--color-bg-secondary);
+}
+.message.user {
+    background-color: var(--color-bg-accent);
+    color: var(--color-text-on-accent);
+}
+html.dark-theme .message.user {
+    color: var(--color-text-primary);
+}
+.message.bot {
+    background-color: var(--color-bg-primary);
+}
+.chatbot-input-form {
+    border-top: 1px solid var(--color-border);
+}
+#chatbot-input {
+    border: 1px solid var(--color-border-input);
+    background-color: var(--color-bg-input);
+    color: var(--color-text-primary);
+}
+#chatbot-input:focus {
+    border-color: var(--color-text-accent);
+}
+#chatbot-send-btn {
+    background-color: var(--color-text-accent);
+    color: var(--color-bg-secondary);
+}
+
 /* ==================================== */
-/* レスポンシブデザインのためのメディアクエリ */
+/* レスポンシブデザイン (CSS変数適用) */
 /* ==================================== */
 
-/* 1024px以下の画面 (タブレット横向き程度) */
 @media (max-width: 1024px) {
     .container {
-        width: 100%; /* 横幅いっぱいに広げる */
+        width: 100%;
         padding: 20px;
     }
-
     .main-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2カラム表示 */
+        grid-template-columns: repeat(2, 1fr);
     }
-
-    /* large-feature は2カラム分維持 */
     .large-feature {
         grid-column: span 2;
-        grid-row: span 1; /* 1行に縮小 */
-        padding: 30px;
+        grid-row: span 1;
+        padding: 0; /* 変更 */
     }
-
+    .large-feature .content-overlay {
+        padding: 30px; /* 変更 */
+    }
     .large-feature h2 {
-        font-size: 32px; /* フォントサイズを小さく */
+        font-size: 32px;
     }
-
     .large-feature .excerpt {
         font-size: 15px;
     }
-
     .medium-feature {
-        grid-column: span 2; /* 2カラム分維持 */
+        grid-column: span 2;
         padding: 25px;
     }
-
     .medium-feature h3 {
         font-size: 20px;
     }
-
     .nav ul {
-        gap: 15px; /* ナビゲーションの間隔を狭く */
+        gap: 15px;
+    }
+
+    /* article.html レスポンシブ */
+    .article-main {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .article-content-wrapper,
+    .sidebar {
+        flex: none;
+        max-width: 100%;
+    }
+    .article-title {
+        font-size: 40px;
+    }
+    .article-excerpt {
+        font-size: 16px;
+    }
+    .article-body h2 {
+        font-size: 28px;
+    }
+    .article-body h3 {
+        font-size: 22px;
+    }
+    .small-box-group {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .small-box-group .grid-item.small-box {
+        padding: 15px;
     }
 }
 
-/* 768px以下の画面 (タブレット縦向き、スマートフォン横向き程度) */
 @media (max-width: 768px) {
     .header {
-        flex-direction: column; /* ヘッダー要素を縦に並べる */
-        align-items: flex-start; /* 左寄せ */
+        flex-direction: column;
+        align-items: flex-start;
         padding-bottom: 15px;
         margin-bottom: 20px;
     }
-
     .header-left {
         margin-bottom: 15px;
     }
-
     .logo {
         font-size: 24px;
         margin-right: 10px;
     }
-
     .tagline {
         font-size: 13px;
     }
-
     .nav {
-        width: 100%; /* ナビゲーションを横幅いっぱいに */
+        width: 100%;
         margin-bottom: 15px;
     }
-
     .nav ul {
-        justify-content: space-around; /* 等間隔に配置 */
-        flex-wrap: wrap; /* 項目が多い場合に折り返す */
-        gap: 10px; /* 間隔をさらに狭く */
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 10px;
     }
-    
     .nav li {
-        flex-basis: 45%; /* 2列で表示されるように */
+        flex-basis: 45%;
         text-align: center;
     }
-
-    .search-btn {
-        align-self: flex-end; /* 右端に配置 */
-        margin-left: auto; /* 右寄せ */
+    .header-right {
+        align-self: flex-end; /* 変更 */
+        margin-left: auto;
+        display: flex; /* 追加 */
+        align-items: center; /* 追加 */
     }
 
     .main-grid {
-        grid-template-columns: 1fr; /* 1カラム表示 */
+        grid-template-columns: 1fr;
         gap: 15px;
     }
-
     .grid-item {
-        grid-column: span 1 !important; /* 全てのアイテムを1カラムに強制 */
-        grid-row: auto !important; /* 行の指定も解除 */
-        min-height: auto; /* 最小高さを自動に */
+        grid-column: span 1 !important;
+        grid-row: auto !important;
+        min-height: auto;
         padding: 20px;
     }
-
     .large-feature {
-        padding: 25px;
-        text-align: center; /* 中央寄せ */
+        padding: 0;
     }
-    
+    .large-feature .content-overlay {
+        padding: 25px;
+        text-align: center;
+    }
     .large-feature h2 {
         font-size: 28px;
         margin-bottom: 15px;
     }
-    
     .large-feature .excerpt {
         font-size: 14px;
     }
-    
     .large-feature .read-more-btn {
-        align-self: center; /* ボタンを中央寄せ */
+        align-self: center;
         margin-top: 20px;
     }
-
     .medium-feature {
         padding: 20px;
-        text-align: center; /* 中央寄せ */
+        text-align: center;
     }
-    
     .medium-feature h3 {
         font-size: 20px;
     }
-    
     .medium-feature .sub-text {
         font-size: 13px;
     }
-
     .small-box h4 {
         font-size: 16px;
         margin-bottom: 10px;
+    }
+    .main-grid .grid-item.small-box {
+        padding: 20px; /* 768px以下ではパディングを戻す */
+        position: relative;
+        padding-top: 0;
+    }
+    .main-grid .grid-item.small-box a {
+        position: static;
+        padding: 0;
+    }
+    .main-grid .grid-item.small-box img {
+        position: static;
+        height: 150px; /* 高さを指定 */
+        margin-top: 15px;
     }
 
     .newsletter-section {
         padding: 25px;
         margin-top: 30px;
     }
-
     .newsletter-title {
         font-size: 20px;
         margin-bottom: 15px;
     }
-
     .newsletter-form {
-        flex-direction: column; /* 縦に並べる */
+        flex-direction: column;
         gap: 10px;
     }
-
     .newsletter-input,
     .newsletter-submit-btn {
-        width: 100%; /* 幅いっぱいに広げる */
+        width: 100%;
         text-align: center;
     }
-}
 
-/* 480px以下の画面 (スマートフォン縦向き) */
-@media (max-width: 480px) {
-    body {
-        padding: 10px;
-    }
-
-    .container {
-        padding: 15px;
-    }
-
-    .header-left {
-        flex-direction: column; /* ロゴとタグラインを縦に並べる */
-        align-items: flex-start;
-        margin-bottom: 10px;
-    }
-
-    .logo {
-        margin-bottom: 5px; /* 間隔 */
-    }
-
-    .nav ul {
-        flex-direction: column; /* ナビゲーションを縦一列に */
-        align-items: flex-start; /* 左寄せ */
-        gap: 8px;
-    }
-
-    .nav li {
-        flex-basis: 100%; /* 幅いっぱいに */
-        text-align: left;
-    }
-
-    .large-feature h2 {
-        font-size: 24px;
-    }
-    
-    .large-feature .excerpt {
-        font-size: 13px;
-    }
-
-    .medium-feature h3 {
-        font-size: 18px;
-    }
-
-    .newsletter-form {
-        gap: 8px;
-    }
-}
-
-
-/* ==================================== */
-/* article.html 用の追加スタイル */
-/* ==================================== */
-
-.article-main {
-    display: flex;
-    gap: 40px; /* メインコンテンツとサイドバーの間隔 */
-    margin-bottom: 40px;
-}
-
-.article-content-wrapper {
-    flex: 3; /* メイン記事部分をサイドバーより広めに */
-    max-width: 65%; /* 最大幅を設定してレイアウトを調整 */
-}
-
-.main-article {
-    background-color: #222222; /* コンテナの背景色に合わせて調整 */
-    padding: 0; /* 元のgrid-itemのpaddingをリセット */
-    border-radius: 5px;
-}
-
-.article-category {
-    font-size: 16px;
-    font-weight: 500;
-    color: #00bcd4; /* アクセントカラー */
-    margin-bottom: 15px;
-    display: block; /* categoryをブロック要素に */
-}
-
-.article-title {
-    font-size: 48px;
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 20px;
-    color: #e0e0e0;
-}
-
-.article-excerpt {
-    font-size: 18px;
-    line-height: 1.6;
-    color: #aaaaaa;
-    margin-bottom: 30px;
-}
-
-/* 既存の .read-more-btn を流用し、色を調整 */
-.main-article .read-more-btn {
-    background-color: #00bcd4; /* アクセントカラー */
-    color: #1a1a1a;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    align-self: flex-start; /* 左寄せ */
-    margin-top: 0; /* large-feature のマージンをリセット */
-    margin-bottom: 50px;
-}
-
-.main-article .read-more-btn:hover {
-    background-color: #00a0b8;
-}
-
-.article-visual {
-    margin-bottom: 40px;
-    overflow: hidden; /* 画像の丸め込みのため */
-    border-radius: 5px;
-}
-
-.article-main-image {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 5px; /* 全体を丸める */
-}
-
-.article-body {
-    font-size: 17px;
-    line-height: 1.8;
-    color: #c0c0c0;
-}
-
-.article-body h2 {
-    font-size: 32px;
-    font-weight: 700;
-    margin-top: 50px;
-    margin-bottom: 25px;
-    color: #e0e0e0;
-}
-
-.article-body h3 {
-    font-size: 24px;
-    font-weight: 600;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    color: #e0e0e0;
-}
-
-.article-body p {
-    margin-bottom: 20px;
-}
-
-/* サイドバー */
-.sidebar {
-    flex: 1; /* メインコンテンツの残りのスペースを埋める */
-    display: flex;
-    flex-direction: column;
-    gap: 30px; /* サイドバー内のブロック間の間隔 */
-    max-width: 35%; /* 最大幅を設定してレイアウトを調整 */
-}
-
-.sidebar-block {
-    background-color: #333333; /* grid-itemと同じ背景色 */
-    padding: 25px;
-    border-radius: 5px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* 少し影を追加 */
-}
-
-.sidebar-block.medium-feature {
-    background-color: #444444; /* トップページと同じ背景色 */
-}
-
-.sidebar-block.medium-feature h3 {
-    font-size: 20px; /* サイドバー用に少し小さく */
-    margin-bottom: 8px;
-}
-
-.sidebar-block.medium-feature .sub-text {
-    font-size: 13px;
-}
-
-.small-box-group {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2カラム */
-    gap: 20px;
-    padding: 0; /* sidebar-blockのpaddingで対応 */
-    background-color: transparent; /* 背景色なし */
-    box-shadow: none; /* 影なし */
-}
-
-.small-box-group .grid-item.small-box {
-    background-color: #333333;
-    padding: 20px;
-    min-height: auto; /* 高さを自動調整 */
-}
-
-.small-box-group .grid-item.small-box h4 {
-    font-size: 16px; /* サイドバー用に少し小さく */
-    margin-bottom: 15px;
-    position: static; /* 既存のsmall-box h4のpositionをリセット */
-    color: #e0e0e0;
-}
-
-/* レスポンシブ対応 (article.html 用の調整) */
-
-/* 1024px以下の画面 */
-@media (max-width: 1024px) {
-    .article-main {
-        flex-direction: column; /* メインコンテンツとサイドバーを縦に並べる */
-        gap: 30px;
-    }
-
-    .article-content-wrapper,
-    .sidebar {
-        flex: none; /* flexgrowを無効に */
-        max-width: 100%; /* 横幅いっぱいに */
-    }
-
-    .article-title {
-        font-size: 40px;
-    }
-
-    .article-excerpt {
-        font-size: 16px;
-    }
-
-    .article-body h2 {
-        font-size: 28px;
-    }
-
-    .article-body h3 {
-        font-size: 22px;
-    }
-
-    .small-box-group {
-        grid-template-columns: repeat(3, 1fr); /* サイドバーの小ボックスを3カラムに */
-    }
-    
-    .small-box-group .grid-item.small-box {
-        padding: 15px;
-    }
-}
-
-/* 768px以下の画面 */
-@media (max-width: 768px) {
+    /* article.html レスポンシブ */
     .article-title {
         font-size: 32px;
     }
-
     .article-excerpt {
         font-size: 15px;
     }
-    
     .main-article .read-more-btn {
         margin-bottom: 30px;
     }
-
     .article-visual {
         margin-bottom: 30px;
     }
-
     .article-body h2 {
         font-size: 24px;
         margin-top: 35px;
         margin-bottom: 20px;
     }
-
     .article-body h3 {
         font-size: 20px;
         margin-top: 30px;
         margin-bottom: 15px;
     }
-    
     .article-body {
         font-size: 16px;
     }
-
     .small-box-group {
-        grid-template-columns: repeat(2, 1fr); /* サイドバーの小ボックスを2カラムに */
+        grid-template-columns: repeat(2, 1fr);
         gap: 15px;
     }
-
     .small-box-group .grid-item.small-box h4 {
         font-size: 15px;
     }
 }
 
-/* 480px以下の画面 */
 @media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    .container {
+        padding: 15px;
+    }
+    .header-left {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 10px;
+    }
+    .logo {
+        margin-bottom: 5px;
+    }
+    .nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .nav li {
+        flex-basis: 100%;
+        text-align: left;
+    }
+    .large-feature h2 {
+        font-size: 24px;
+    }
+    .large-feature .excerpt {
+        font-size: 13px;
+    }
+    .medium-feature h3 {
+        font-size: 18px;
+    }
+    .newsletter-form {
+        gap: 8px;
+    }
+
+    /* article.html レスポンシブ */
     .article-title {
         font-size: 28px;
     }
-
     .article-excerpt {
         font-size: 14px;
     }
-
     .main-article .read-more-btn {
         margin-bottom: 25px;
     }
-
     .article-body h2 {
         font-size: 22px;
         margin-top: 30px;
         margin-bottom: 18px;
     }
-
     .article-body h3 {
         font-size: 18px;
         margin-top: 25px;
         margin-bottom: 12px;
     }
-
     .article-body {
         font-size: 15px;
     }
-
     .small-box-group {
-        grid-template-columns: 1fr; /* サイドバーの小ボックスを1カラムに */
+        grid-template-columns: 1fr;
         gap: 10px;
     }
-
     .small-box-group .grid-item.small-box h4 {
         font-size: 14px;
     }

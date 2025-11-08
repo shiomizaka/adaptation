@@ -401,6 +401,125 @@
       </ul>
     </nav>
   </div>
+
+  <style>
+    
+  /* style.css に追加または調整 */
+
+/* グリッドコンテナの基本設定 */
+.main-grid.bingo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3列均等 */
+    grid-auto-rows: 280px; /* 各行の高さを固定 (必要に応じて調整) */
+    gap: 20px; /* グリッド間の間隔 */
+    margin-bottom: 40px; /* 下部余白 */
+    max-width: 1200px; /* グリッド全体の最大幅 (必要に応じて調整) */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 各グリッドアイテムの共通スタイル */
+.grid-item.bingo-item {
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* コンテンツを下部に寄せる */
+    padding: 20px;
+    color: var(--color-text-on-image); /* 画像上のテキスト色 (白など) */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* テキストの視認性向上 */
+    border-radius: 8px; /* 角丸 */
+    box-shadow: 0 4px 10px var(--color-shadow);
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    text-decoration: none; /* リンクの下線を消す */
+}
+
+/* 画像オーバーレイ */
+.grid-item.bingo-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.35); /* 画像に半透明のオーバーレイ */
+    z-index: 1;
+    transition: background-color 0.2s ease-out;
+}
+
+/* ホバー時の効果 */
+.grid-item.bingo-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px var(--color-shadow);
+}
+.grid-item.bingo-item:hover::before {
+    background-color: rgba(0, 0, 0, 0.5); /* ホバー時にオーバーレイを濃くする */
+}
+
+/* テキストコンテンツのスタイル */
+.grid-item.bingo-item a {
+    position: relative;
+    z-index: 2;
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.grid-item.bingo-item .category {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #c0c0c0;
+    opacity: 0.8;
+}
+
+.grid-item.bingo-item h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.3;
+    color: #ffffff;
+}
+
+.grid-item.bingo-item .excerpt {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #e0e0e0;
+    opacity: 0.9;
+    margin-bottom: 0; /* 説明文の最後の要素なので下余白なし */
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1024px) {
+    .main-grid.bingo-grid {
+        grid-template-columns: repeat(2, 1fr); /* タブレットでは2列 */
+        grid-auto-rows: 250px;
+        gap: 15px;
+        padding: 0 15px; /* 左右に余白 */
+    }
+    .grid-item.bingo-item h3 { font-size: 18px; }
+    .grid-item.bingo-item .excerpt { font-size: 13px; }
+}
+
+@media (max-width: 768px) {
+    .main-grid.bingo-grid {
+        grid-template-columns: 1fr; /* スマホでは1列 */
+        grid-auto-rows: 220px;
+        gap: 10px;
+        padding: 0 10px;
+    }
+    .grid-item.bingo-item h3 { font-size: 18px; }
+    .grid-item.bingo-item .excerpt { font-size: 13px; }
+}
+
+
+    </style>
+
 </header>
 <div class="app-header"></div>
 <main class="l-main p-subpage">
@@ -414,7 +533,7 @@
             <img src="https://adaptation-platform.nies.go.jp/climate_change_adapt/img/climate-change-adapt-kv.jpg" alt="" width="1010" height="280"/> </picture>
         </div>
         <hgroup class="c-heading-subpage -climate">
-          <h1 class="c-heading-subpage__title icon">気候変動適応とは</h1>
+          <h1 class="c-heading-subpage__title icon">気候変動適応をもう一度考える</h1>
           <span class="c-heading-subpage__icon u-select-none"><img src="https://adaptation-platform.nies.go.jp/common/images/common/side-icon-01.svg" alt="" width="66" height="66"/></span>
           <p class="c-heading-subpage__sub font-en">WHAT'S Climate Change Adaptation?</p>
         </hgroup>
@@ -448,153 +567,98 @@
             <div class="p-top-adaptation__left-number"><strong>1.40</strong>°C<span class="up"><img src="https://adaptation-platform.nies.go.jp/common/images/top/adaptation-up.svg" alt="上昇" width="" height=""/></span></div>
           </div>
         </div>
-        <p>気候変動適応について、過去のデータや将来予測、様々な対策の紹介を含めて、６つの観点から解説しています。</p>
-        <div class="p-climate__explanation"><span class="-yellow">どなたにもわかりやすい内容</span><span class="-blue">より詳しい専門的な内容</span></div>
-        <div class="c-subpage-toc-climate" x-data="{ isMobile: window.innerWidth &lt; 959 }" x-init="window.addEventListener('resize', () =&gt; isMobile = window.innerWidth &lt; 959)">
-          <details class="c-subpage-toc-climate__content" x-bind:open="!isMobile">
-            <summary class="c-subpage-toc-climate__summary" x-bind:tabindex="isMobile ? '0' : '-1'"><span class="c-subpage-toc-climate__heading"><span class="number">1</span>気候変動とは</span><span class="plus for-mobile"></span></summary>
-            <ul class="c-subpage-toc-climate__list">
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0101.html">気候変動とは<span class="arrow"></span></a></li>
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0102.html">気候変動の要因<span class="arrow"></span></a></li>
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0103.html">これまでの気候<span class="arrow"></span></a></li>
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0104.html">将来の気候<span class="arrow"></span></a></li>
-              <li><a class="-blue c-subpage-toc-climate__link" href="adapt/a-0105.html">将来気候の予測方法<span class="arrow"></span></a></li>
-            </ul>
-          </details>
-          <details class="c-subpage-toc-climate__content" x-bind:open="!isMobile">
-            <summary class="c-subpage-toc-climate__summary" x-bind:tabindex="isMobile ? '0' : '-1'"><span class="c-subpage-toc-climate__heading"><span class="number">2</span>気候変動影響と対策</span><span class="plus for-mobile"></span></summary>
-            <ul class="c-subpage-toc-climate__list">
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0201.html">さまざまな分野への影響<span class="arrow"></span></a></li>
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0202.html">緩和<span class="arrow"></span></a></li>
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0203.html">適応<span class="arrow"></span></a></li>
-            </ul>
-          </details>
-          <details class="c-subpage-toc-climate__content" x-bind:open="!isMobile">
-            <summary class="c-subpage-toc-climate__summary" x-bind:tabindex="isMobile ? '0' : '-1'"><span class="c-subpage-toc-climate__heading"><span class="number">3</span>各分野の気候変動影響と適応</span><span class="plus for-mobile"></span></summary>
-            <ul class="c-subpage-toc-climate__list">
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0301.html">農業・林業・水産業<span class="arrow"></span></a></li>
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0302.html">水環境・水資源<span class="arrow"></span></a></li>
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0303.html">自然生態系<span class="arrow"></span></a></li>
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0304.html">自然災害・沿岸域<span class="arrow"></span></a></li>
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0305.html">健康<span class="arrow"></span></a></li>
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0306.html">産業・経済活動<span class="arrow"></span></a></li>
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0307.html">国民生活・都市生活<span class="arrow"></span></a></li>
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0308.html">海外での影響<span class="arrow"></span></a></li>
-            </ul>
-          </details>
-          <details class="c-subpage-toc-climate__content" x-bind:open="!isMobile">
-            <summary class="c-subpage-toc-climate__summary" x-bind:tabindex="isMobile ? '0' : '-1'"><span class="c-subpage-toc-climate__heading"><span class="number">4</span>日本の適応</span><span class="plus for-mobile"></span></summary>
-            <ul class="c-subpage-toc-climate__list">
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0401.html">国の適応<span class="arrow"></span></a></li>
-              <li><a class="-blue c-subpage-toc-climate__link" href="adapt/a-0402.html">適応法<span class="arrow"></span></a></li>
-              <li><a class="-blue c-subpage-toc-climate__link" href="adapt/a-0403.html">影響評価報告書<span class="arrow"></span></a></li>
-              <li><a class="-blue c-subpage-toc-climate__link" href="adapt/a-0404.html">国の適応計画<span class="arrow"></span></a></li>
-              <li><a class="-blue c-subpage-toc-climate__link" href="adapt/a-0405.html">府省庁の取組<span class="arrow"></span></a></li>
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0406.html">地域の適応<span class="arrow"></span></a></li>
-              <li><a class="-blue c-subpage-toc-climate__link" href="adapt/a-0407.html">地方公共団体の役割<span class="arrow"></span></a></li>
-              <li><a class="-blue c-subpage-toc-climate__link" href="adapt/a-0408.html">地方公共団体の取組<span class="arrow"></span></a></li>
-              <li><a class="-blue c-subpage-toc-climate__link" href="adapt/a-0409.html">研究機関の取組<span class="arrow"></span></a></li>
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0410.html">事業者の取組<span class="arrow"></span></a></li>
-            </ul>
-          </details>
-          <details class="c-subpage-toc-climate__content" x-bind:open="!isMobile">
-            <summary class="c-subpage-toc-climate__summary" x-bind:tabindex="isMobile ? '0' : '-1'"><span class="c-subpage-toc-climate__heading"><span class="number">5</span>世界の適応</span><span class="plus for-mobile"></span></summary>
-            <ul class="c-subpage-toc-climate__list">
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0501.html">世界の枠組み<span class="arrow"></span></a></li>
-              <li><a class="-blue c-subpage-toc-climate__link" href="adapt/a-0502.html">パリ協定<span class="arrow"></span></a></li>
-              <li><a class="-blue c-subpage-toc-climate__link" href="adapt/a-0503.html">IPCC<span class="arrow"></span></a></li>
-              <li><a class="-blue c-subpage-toc-climate__link" href="adapt/a-0504.html">IPCC第6次評価報告書<span class="arrow"></span></a></li>
-            </ul>
-          </details>
-          <details class="c-subpage-toc-climate__content" x-bind:open="!isMobile">
-            <summary class="c-subpage-toc-climate__summary" x-bind:tabindex="isMobile ? '0' : '-1'"><span class="c-subpage-toc-climate__heading"><span class="number">6</span>私たちにできる適応</span><span class="plus for-mobile"></span></summary>
-            <ul class="c-subpage-toc-climate__list">
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0601.html">学習コンテンツ<span class="arrow"></span></a></li>
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0602.html">実生活で適応する<span class="arrow"></span></a></li>
-              <li><a class="-orange c-subpage-toc-climate__link" href="adapt/a-0603.html">活動に参加する（市民参加、市民科学）<span class="arrow"></span></a></li>
-            </ul>
-          </details>
+        <p>気候変動適応について、過去のデータや将来予測、様々な対策の紹介を含めて、8つの観点から解説しています。</p>
+        
         </div>
         
-        <div class="sesaku-link">
-          <div class="sesaku-link-item1">
-            <h4>
-              <a href="pdf/adapt-advanced-01_2503.pdf" target="_blank" type="application/pdf">■ 施策に気候変動影響予測・評価を反映する際の考え方（第1版）</a><time datetime="2025-04-02"></time>
-            </h4>
-            <p class="p-climate__desc">
-              【施策立案者やその支援者向け】<br>科学的知見（気候予測、影響予測等）の施策反映を支援することを目的として、「予測・評価手法⇒施策反映への考え方⇒課題とその対応方法⇒施策事例」を一連の流れで解説しています。是非実務でご活用下さい。
-            </p>
-          </div>
-          <div class="sesaku-link-item2">
-            <a href="pdf/adapt-advanced-01_2503.pdf" target="_blank"><img src="img/bnr_advanced_img.jpg" alt="施策に気候変動影響予測・評価を反映する際の考え方"></a>
-          </div>
-        </div>
-        <div class="sesaku-link">
-          <div class="sesaku-link-item1">
-            <h4>
-              <a href="pdf/adapt-advanced-02_2508.pdf" target="_blank" type="application/pdf">■ 冊子版「施策に気候シナリオ・影響予測を反映するために ー基本的な考え方ー」</a><time datetime="2025-10-02"></time>
-            </h4>
-            <p class="p-climate__desc">
-              上記考え方のうち、「特に将来予測される気候変動影響をどのように施策に反映したらよいか」の基本的な考え方部分について、冊子にしました。入門編としてご活用下さい。</p>
-          </div>
-          <div class="sesaku-link-item2">
-            <a href="pdf/adapt-advanced-02_2508.pdf" target="_blank"><img src="img/bnr_advanced_img02.jpg" alt="施策に気候変動影響予測・評価を反映する際の考え方"></a>
-          </div>
-        </div>
-      </div>
-      <div class="p-climate__section-stack m50-b">
+
         <section>
-          <h2 class="c-border-left-heading">気候変動適応とは</h2>
-          <div class="stack">
-            <p class="p-climate__desc">地球温暖化の対策には、その原因物質である温室効果ガス排出量を削減する（または植林などによって吸収量を増加させる）「緩和」と、気候変化に対して自然生態系や社会・経済システムを調整することにより気候変動の悪影響を軽減する（または気候変動の好影響を増長させる）「適応」の二本柱があります。</p>
-            <p class="p-climate__desc">「適応」とは、「現実の気候または予想される気候およびその影響に対する調整の過程。人間システムにおいて、適応は害を和らげもしくは回避し、または有益な機会を活かそうとする。一部の自然システムにおいては，人間の介入は予想される気候やその影響に対する調整を促進する可能性がある」と定義されています。気候変動による悪影響を軽減するのみならず、気候変動による影響を有効に活用することも含みます。</p>
-          </div>
-          <div class="p-climate__img">
-            <picture class="main-img">
-              <source media="(max-width: 959px)" srcset="https://adaptation-platform.nies.go.jp/common/images/climate-change/climate-change-pic-01-pc.jpg"/>
-              <img src="https://adaptation-platform.nies.go.jp/common/images/climate-change/climate-change-pic-01-pc.jpg" alt="（左）緩和とは？（右）適応とは？" width="" height=""/>
-            </picture>
-          </div>
+          
+          
+
+          <main class="main-grid bingo-grid">
+
+    <div class="grid-item bingo-item" style="background-image: url('../img/agri-bg.jpg');">
+        <a href="agri.html">
+            <p class="category">AGRICULTURE, FORESTRY, AND FISHERIES</p>
+            <h3>農・林・水産業：水稲</h3>
+            <p class="excerpt">水稲における気候変動の影響。</p>
+        </a>
+    </div>
+
+    <div class="grid-item bingo-item" style="background-image: url('../img/agri2-bg.jpg');">
+        <a href="agri2.html">
+            <p class="category">FRUIT AND ANIMAL HUSBANDRY</p>
+            <h3>農・林・水産業：果樹・畜産</h3>
+            <p class="excerpt">ぶどう、りんご、温州みかんへの影響。</p>
+        </a>
+    </div>
+
+    <div class="grid-item bingo-item" style="background-image: url('../img/water-bg.jpg');">
+        <a href="water.html">
+            <p class="category">WATER ENVIRONMENT</p>
+            <h3>水環境・水資源</h3>
+            <p class="excerpt">湖沼・ダム湖、河川、沿岸域及び閉鎖性海域。</p>
+        </a>
+    </div>
+
+    <div class="grid-item bingo-item" style="background-image: url('../img/ecosystem-bg.jpg');">
+        <a href="ecosystem.html">
+            <p class="category">NATURAL ECOSYSTEMS</p>
+            <h3>自然生態系</h3>
+            <p class="excerpt">生態系は微妙なバランスで成り立っている。</p>
+        </a>
+    </div>
+
+    <div class="grid-item bingo-item" style="background-image: url('../img/about_logo_w.gif');">
+        
+            
+            
+        
+    </div>
+
+    <div class="grid-item bingo-item" style="background-image: url('../img/disasters-bg.jpg');">
+        <a href="disasters.html">
+            <p class="category">DISASTERS AND COASTAL AREA</p>
+            <h3>自然災害・沿岸域</h3>
+            <p class="excerpt">自然災害は気候変動の影響で増えている。</p>
+        </a>
+    </div>
+
+    <div class="grid-item bingo-item" style="background-image: url('../img/health-bg.jpg');">
+        <a href="health.html">
+            <p class="category">HEALTH AND WELL-BEING</p>
+            <h3>健康</h3>
+            <p class="excerpt">気候変動による健康被害。</p>
+        </a>
+    </div>
+
+    <div class="grid-item bingo-item" style="background-image: url('../img/economic-bg.jpg');">
+        <a href="industrial.html">
+            <p class="category">INDUSTRIAL AND ECONOMIC ACTIVITIES</p>
+            <h3>産業・経済活動</h3>
+            <p class="excerpt">産業への影響は観光業だけではない。</p>
+        </a>
+    </div>
+
+    <div class="grid-item bingo-item" style="background-image: url('../img/city-bg1.jpg');">
+        <a href="citizen.html">
+            <p class="category">CITIZEN AND CITY LIFE</p>
+            <h3>国民生活・都市生活</h3>
+            <p class="excerpt">インフラ、ライフライン、生物季節の変化。</p>
+        </a>
+    </div>
+
+</main>
+          
+
+
+
+
         </section>
-        <section>
-          <h2 class="c-border-left-heading">適応がなぜ必要か</h2>
-          <div class="stack">
-            <p class="p-climate__desc">気候変動を抑えるためには、緩和が最も必要かつ重要な対策です。IPCC WGI第六次評価報告書によると、世界平均気温は、少なくとも今世紀半ばまでは上昇を続け、向こう数十年の間に二酸化炭素及びその他の温室効果ガスの排出が大幅に減少しない限り、21世紀中に、産業革命以前と比べ1.5℃および2℃を超えると報告されています。</p>
-            <p class="p-climate__desc">緩和の効果が現れるには長い時間がかかるため、早急に大幅削減に向けた取組みを開始し、それを長期にわたり強化・継続していかなければなりませんが、最大限の排出削減努力を行っても、過去に排出された温室効果ガスの大気中への蓄積があり、ある程度の気候変動は避けられません。観測記録を更新するような異常気象が、私たちの生活に大きな影響を及ぼしています。激しい大雨が毎年のように水害を引き起こし、災害級の暑さによりひと夏で１０００人以上の死者が出た年もあります。気候変動によって、こうした異常気象が将来は頻繁に発生したり深刻化したりすることが懸念されており、変化する気候のもとで悪影響を最小限に抑える「適応」が不可欠なのです。</p>
-            <p class="p-climate__desc">もちろん、変化する気候が私たちにとって有利に働くことを活用する適応も考えられます。例えば農業では、気温の上昇に伴ってこれまで作物を栽培できなかった場所で新たな農業ができるようになったり、付加価値の高い品種に転換することができるようになるかもしれません。こうした気候変動がもたらす正の影響も生かしていく視点も大切です。</p>
-          </div>
-        </section>
-        <section>
-          <h2 class="c-border-left-heading">適応への取り組み</h2>
-          <div class="stack">
-            <p class="p-climate__desc">気候変動の影響が深刻化することをうけ、国連は2015年のパリ協定で「世界共通の長期目標として2℃目標の設定、1.5℃に抑える努力を追求すること」を合意しました。また同年９月には、「我々の世界を変革する：持続可能な開発のための2030アジェンダ」で誰一人取り残さない社会の構築を目指すことを宣言し、行動計画である持続可能な開発目標（SDGs）のゴール13では、「気候変動に具体的な対策を」を定めました。ゴール13にはさらに細分化された目標があり、13.1として「気候関連災害に対する強靱性（レジリエンス）及び適応の能力を強化」を設定しています。</p>
-            <p class="p-climate__desc">GHGを削減して「世界の平均気温の上昇を1.5 ℃に抑える」という目標が明確になっている緩和と異なり、適応には世界共通の明確な目標が定められていません。これは、気候変動の影響が地域の地理的、経済的、社会的な条件などによってさまざまな形で顕在化することから、取るべき対策も国ごとに異なるためです。このため日本では、国全体が気候変動の影響を回避し低減することを目的として「気候変動適応法」を2018年に制定しました。気候変動適応法では、各地域が自然や社会経済の状況に合わせて適応策を実施することが盛り込まれています。</p>
-            <p class="p-climate__desc">2020年、日本は「気候非常事態宣言」を採択しました。また2021年には「地球温暖化対策の推進に関する法律」を改訂し、国際社会と足並みをそろえて脱炭素社会の実現を目指すことを宣言しました。一方、将来の気候変動の影響に備えるため、各自治体が気候変動適応法に従って地域気候変動適応計画を策定しています。気候変動の影響は私達の社会に深刻な影響を及ぼすため、日本でも緩和と適応の両輪で気候変動の課題に社会全体で取り組むことが今求められています。</p>
-          </div>
-        </section>
-        <section>
-          <h2 class="c-border-left-heading">気候変動適応法</h2>
-          <div class="stack">
-            <p class="p-climate__desc">気候変動適応法は、適応の総合的推進、情報基盤の整備、地域での適応の強化、適応の国際展開等の４つの柱で成り立っており、それぞれの考え方や進め方が明記されています。気候変動適応法では、国、地方公共団体、事業者、国民、それぞれが適応の推進を担うと明確化されています。国だけが気候変動適応に取り組むのではなく、地方公共団体、事業者、国民が一丸となって取り組まなくては、気候変動の影響に立ち向かうことはできません。もちろん、適応に取り組む主役となる地方公共団体の役割強化は特に配慮されています。また、適応の国際展開も視野に入れ、国際協力の推進や事業者等の取組み、適応ビジネスの促進も目指しています。</p>
-          </div>
-          <div class="p-climate__img">
-            <picture class="main-img">
-              <source media="(max-width: 959px)" srcset="https://adaptation-platform.nies.go.jp/common/images/climate-change/climate-change-pic-02-pc.jpg"/>
-              <img src="https://adaptation-platform.nies.go.jp/common/images/climate-change/climate-change-pic-02-pc.jpg" alt="（左）緩和とは？（右）適応とは？" width="" height=""/> </picture>
-          </div>
-        </section>
-        <section>
-          <h2 class="c-border-left-heading">国立環境研究所の役割</h2>
-          <div class="stack">
-            <p class="p-climate__desc">気候変動適応法が定める国立環境研究所の役割が大きく３つあります。１つ目は、気候変動影響および気候変動適応に関する情報の収集、分析、整理および提供です。２つ目は、都道府県又は市町村に対する地域気候変動適応計画の策定又は推進に係る技術的助言その他の技術的支援です。３つ目は、地域気候変動適応センターに対する技術的助言その他の技術的援助です。このような役割を担うために、国立環境研究所では、2018年12月に気候変動適応センターを設立しました。同センターは地域気候変動適応センターとの情報交換を通じて現場情報を集積し、有用な適応情報を地域間に共有することで広域的な適応策実施のための支援などを行うことを目的としています。また国内だけでなく、アジア太平洋地域の適応策のための情報分析や情報提供や支援も行います。</p>
-          </div>
-        </section>
-        <blockquote class="c-blockquote">
-          <div class="c-blockquote__title">出典</div>
-          <ul class="c-blockquote__list">
-            <li class="c-blockquote__item">肱岡靖明（2021）「気候変動への「適応」を考える: 不確実な未来への備え」丸善出版</li>
-          </ul>
-        </blockquote>
+        
+       
+
       </div>
       <nav class="c-bread__nav">
         <ol class="c-bread" itemscope="itemscope" itemtype="https://schema.org/BreadcrumbList">
