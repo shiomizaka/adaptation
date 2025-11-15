@@ -1,0 +1,53 @@
+/* --- 1. テーブルヘッダのスティッキー（追従）化 --- */
+
+.Trend #items thead th {
+    /* ヘッダーを画面上部に固定する */
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0; 
+    
+    /* 他のセルより手前に表示 */
+    z-index: 2; 
+    
+    /* 元のCSSから背景色を再指定（必須） */
+    /* これがないと、スクロールする内容が透けて見えてしまいます */
+    background: #D9D9D9; 
+}
+
+/* スティッキーヘッダーの境界線を再描画 */
+.Trend #items thead th::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid #AAA;
+}
+
+
+/* --- 2. テーブルのtdの横幅を一定に --- */
+
+/* colgroup がHTMLに存在しない場合に備え、th/td に直接幅を指定します */
+/* (元のCSSの比率を参考にしています) */
+
+.Trend #items th.summary,
+.Trend #items td.summary {
+    width: 38%;
+}
+
+.Trend #items th.area,
+.Trend #items td.area {
+    width: 14%;
+    min-width: 150px; /* 最小幅を指定 */
+}
+
+.Trend #items th.action,
+.Trend #items td.action {
+    width: 33%;
+}
+
+.Trend #items th.links,
+.Trend #items td.links {
+    width: 15%;
+    min-width: 190px; /* 最小幅を指定 */
+}

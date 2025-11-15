@@ -1,7 +1,7 @@
 $(document).ready(function() {
     
     // --- グローバル変数 ---
-    let allData = []; // trend.json の全データを保持
+    let allData = []; // trends.json の全データを保持
     
     // フォーム関連
     const $form = $('#filter');
@@ -40,9 +40,10 @@ $(document).ready(function() {
         let count = 0;
 
         $.each(items, function(index, item) {
+            
             let linksHtml = '‐'; 
             if (item.links && item.links.href) {
-                var targetId = item.links.href.split('#')[1];
+                var targetId = item.links.href.split('#')[1]; 
                 linksHtml = `
                     <dl class="nav search-text">
                         <dt>${item.links.type}</dt>
@@ -86,132 +87,163 @@ $(document).ready(function() {
     }
 
     /**
-     * ★★★ これが連動フィルターの心臓部 ★★★
-     * フィルターの状態が変更されるたびに呼び出される
+     * フィルターの件数・表示を更新し、データを絞り込んで描画する
+     * (この関数はページの読み込みが完了した時に1回だけ実行される)
      */
-    function updateFiltersAndResults() {
+    function initializeFiltersAndDisplay() {
         
-        // 1. 現在の全フィルターの値を取得
-        const currentType = $selectType.val() || "";
-        const currentMethods = $selectMethod.val() || [];
-        const currentProjects = $selectProject.val() || [];
-        const query = $('input#filter_word').val().toLowerCase().split(/[\s,、。|]+/).filter(Boolean);
+        // 1. URLから現在のフィルター設定を読み込む
+        const params = new URLSearchParams(window.location.search);
+        const currentType = params.get('type') || "";
+        const currentMethods = params.getAll('method').filter(v => v !== "");
+        const currentProjects = params.getAll('project').filter(v => v !== "");
+        const query = params.get('q') || "";
+        const processedQuery = query.toLowerCase().split(/[\s,、。|]+/).filter(Boolean);
 
-        // 2. 他フィルターの選択を考慮して、各フィルターの件数を再計算
-        
-        // (A) 「業種」の件数を計算
-        //     (絞り込み条件: method, project, query)
+        // 2. フィルターの件数を計算
         let typeCounts = {};
-        let typeTotal = 0;
+        let methodCounts = {};
+        let projectCounts = {};
+        let typeTotal = 0, methodTotal = 0, projectTotal = 0;
+
+        // 連動フィルターのロジック
         const typeSubset = allData.filter(item => {
-            if (currentMethods.length > 0 && !currentMethods.includes("") && !currentMethods.includes(item.method)) return false;
-            if (currentProjects.length > 0 && !currentProjects.includes("") && !currentProjects.includes(item.project)) return false;
-            // (フリーワード検索は、フィルターの件数には影響させないのが一般的)
+            if (currentMethods.length > 0 && !currentMethods.includes(item.method)) return false; 
+            if (currentProjects.length > 0 && !currentProjects.includes(item.project)) return false;
             return true;
         });
-        typeSubset.forEach(item => {
-            if(item.type) typeCounts[item.type] = (typeCounts[item.type] || 0) + 1;
-        });
+        typeSubset.forEach(item => { if(item.type) typeCounts[item.type] = (typeCounts[item.type] || 0) + 1; });
         typeTotal = typeSubset.length;
         
-        // (B) 「物理的リスク」の件数を計算
-        //     (絞り込み条件: type, project, query)
-        let methodCounts = {};
-        let methodTotal = 0;
         const methodSubset = allData.filter(item => {
-            if (currentType && item.type !== currentType) return false;
-            if (currentProjects.length > 0 && !currentProjects.includes("") && !currentProjects.includes(item.project)) return false;
+            if (currentType && item.type !== currentType) return false; 
+            if (currentProjects.length > 0 && !currentProjects.includes(item.project)) return false;
             return true;
         });
-        methodSubset.forEach(item => {
-            if(item.method) methodCounts[item.method] = (methodCounts[item.method] || 0) + 1;
-        });
+        methodSubset.forEach(item => { if(item.method) methodCounts[item.method] = (methodCounts[item.method] || 0) + 1; });
         methodTotal = methodSubset.length;
 
-        // (C) 「リスク/機会」の件数を計算
-        //     (絞り込み条件: type, method, query)
-        let projectCounts = {};
-        let projectTotal = 0;
         const projectSubset = allData.filter(item => {
             if (currentType && item.type !== currentType) return false;
-            if (currentMethods.length > 0 && !currentMethods.includes("") && !currentMethods.includes(item.method)) return false;
+            if (currentMethods.length > 0 && !currentMethods.includes(item.method)) return false;
             return true;
         });
-        projectSubset.forEach(item => {
-            if(item.project) projectCounts[item.project] = (projectCounts[item.project] || 0) + 1;
-        });
+        projectSubset.forEach(item => { if(item.project) projectCounts[item.project] = (projectCounts[item.project] || 0) + 1; });
         projectTotal = projectSubset.length;
-
+        
         // 3. 各ドロップダウンの <option> を更新
         updateOptionCounts($selectType, typeCounts, typeTotal);
         updateOptionCounts($selectMethod, methodCounts, methodTotal);
         updateOptionCounts($selectProject, projectCounts, projectTotal);
-
-        // 4. SumoSelectの表示をリロード（必須）
-        $selectType[0].sumo.reload();
-        $selectMethod[0].sumo.reload();
-        $selectProject[0].sumo.reload();
-
+        
+        // 4. URLパラメータに基づいて<select>の値を設定 (SumoSelect初期化前)
+        if (currentType) {
+            $selectType.val(currentType);
+        }
+        if (currentMethods.length > 0) {
+            $selectMethod.val(currentMethods);
+        }
+        if (currentProjects.length > 0) {
+            $selectProject.val(currentProjects);
+        }
+        if (query) {
+            $('input#filter_word').val(query);
+        }
+        
         // 5. 最終的な絞り込み結果を計算
         const filteredData = allData.filter(function(item) {
             if (currentType && item.type !== currentType) return false;
-            if (currentMethods.length > 0 && !currentMethods.includes("") && !currentMethods.includes(item.method)) return false;
-            if (currentProjects.length > 0 && !currentProjects.includes("") && !currentProjects.includes(item.project)) return false;
+            if (currentMethods.length > 0 && !currentMethods.includes(item.method)) return false;
+            if (currentProjects.length > 0 && !currentProjects.includes(item.project)) return false;
             
-            if (query.length > 0) {
+            if (processedQuery.length > 0) {
                 const searchableText = [
                     item.summary,
                     $(item.area).text(), 
                     $(item.action).text(),
                     (item.links && item.links.name) ? item.links.name : ''
                 ].join(' ').toLowerCase();
-                return query.every(q => searchableText.includes(q));
+                return processedQuery.every(q => searchableText.includes(q));
             }
             return true;
         });
 
         // 6. 絞り込んだデータで表を描画
         renderData(filteredData);
+        
         // 7. 検索条件タグを更新
-        updateConditionsDisplay(currentType, currentMethods, currentProjects, query);
+        const finalCount = filteredData.length;
+        updateConditionsDisplay(currentType, currentMethods, currentProjects, processedQuery, finalCount);
     }
 
     /**
      * 検索条件タグの表示を更新する関数
+     * ★ 修正：空の配列や空文字列をチェック
      */
-    function updateConditionsDisplay(type, methods, projects, query) {
+    function updateConditionsDisplay(type, methods, projects, query, finalCount) {
         $conditionSamples.empty();
         let hasCondition = false;
 
-        if (type) {
-            const text = $selectType.find(`option[value="${type}"]`).data('original-text');
-            addConditionTag(text, 'filter_type', type);
-            hasCondition = true;
+        // ★ typeが空文字列でない場合のみ表示
+        if (type && type !== "") {
+            let text = $selectType.find(`option[value="${type}"]`).data('original-text');
+            if (text) { // undefinedでない場合のみ
+                text = `${text} (${finalCount})`; 
+                addConditionTag(text, 'filter_type', type);
+                hasCondition = true;
+            }
         }
         
-        const displayMethods = methods.filter(v => v !== "");
-        displayMethods.forEach(function(val) {
-            const text = $selectMethod.find(`option[value="${val}"]`).data('original-text');
-            addConditionTag(text, 'filter_method', val);
-            hasCondition = true;
-        });
+        // ★ methodsが空配列でない場合のみ処理
+        if (methods && methods.length > 0) {
+            methods.forEach(function(val) {
+                if (val && val !== "") { // 空文字列でない場合のみ
+                    let text = $selectMethod.find(`option[value="${val}"]`).data('original-text');
+                    if (text) { // undefinedでない場合のみ
+                        text = `${text} (${finalCount})`; 
+                        addConditionTag(text, 'filter_method', val);
+                        hasCondition = true;
+                    }
+                }
+            });
+        }
         
-        const displayProjects = projects.filter(v => v !== "");
-        displayProjects.forEach(function(val) {
-            const text = $selectProject.find(`option[value="${val}"]`).data('original-text');
-            addConditionTag(text, 'filter_project', val);
-            hasCondition = true;
-        });
+        // ★ projectsが空配列でない場合のみ処理
+        if (projects && projects.length > 0) {
+            projects.forEach(function(val) {
+                if (val && val !== "") { // 空文字列でない場合のみ
+                    let text = $selectProject.find(`option[value="${val}"]`).data('original-text');
+                    if (text) { // undefinedでない場合のみ
+                        text = `${text} (${finalCount})`; 
+                        addConditionTag(text, 'filter_project', val);
+                        hasCondition = true;
+                    }
+                }
+            });
+        }
 
-        if (query.length > 0) {
-            addConditionTag(query.join(' '), 'filter_word', query.join(' '));
-            hasCondition = true;
+        // ★ queryが空配列でない場合のみ処理
+        if (query && query.length > 0) {
+            let text = query.join(' ');
+            if (text && text.trim() !== "") { // 空文字列でない場合のみ
+                text = `${text} (${finalCount})`; 
+                addConditionTag(text, 'filter_word', query.join(' '));
+                hasCondition = true;
+            }
         }
-        $conditions.attr('aria-hidden', !hasCondition).toggle(hasCondition);
+        
+        // ★ 条件がある場合のみ表示
+        if (hasCondition) {
+            $conditions.attr('aria-hidden', 'false').show();
+            console.log('Search conditions displayed:', {type, methods, projects, query});
+        } else {
+            $conditions.attr('aria-hidden', 'true').hide();
+            console.log('No search conditions - hiding condition tags');
+        }
     }
 
     /**
-     * 検索条件タグ（[x]ボタン付き）を追加するヘルパー関数
+     * 検索条件タグ([x]ボタン付き)を追加するヘルパー関数
      */
     function addConditionTag(text, controlId, value) {
         const $tag = $conditionTemplate.clone();
@@ -221,6 +253,7 @@ $(document).ready(function() {
             .val(value)
             .attr('title', `この「${text}」の検索条件を解除します`);
         $conditionSamples.append($tag);
+        console.log('Condition tag added:', text);
     }
 
     /**
@@ -267,17 +300,16 @@ $(document).ready(function() {
         const $imgEl = $('#page-header-img');
         const $linkEl = $('#trend-link');
         
-        if (type) {
-            const text = $(`select#filter_type option[value="${type}"]`).data('original-text');
-            if (text) {
-                $imgEl.attr('src', $imgEl.attr('data-src').replace('{type}', type))
-                      .attr('alt', $imgEl.attr('data-alt').replace('{type}', text))
-                      .show();
-                document.title = $imgEl.attr('data-title').replace('{type}', text);
-                $nameEl.text($nameEl.attr('data-text').replace('{type}', text));
-                $linkEl.attr('href', $linkEl.attr('data-href').replace('{type}', type));
-                $('#items-name').text($('#items-name').attr('data-text').replace('{type}', text)).show();
-            }
+        const text = $(`select#filter_type option[value="${type}"]`).text().replace(/\s\(\d+\)$/, ''); // "(22)" などを削除
+        
+        if (type && text) {
+            $imgEl.attr('src', $imgEl.attr('data-src').replace('{type}', type))
+                    .attr('alt', $imgEl.attr('data-alt').replace('{type}', text))
+                    .show();
+            document.title = $imgEl.attr('data-title').replace('{type}', text);
+            $nameEl.text($nameEl.attr('data-text').replace('{type}', text));
+            $linkEl.attr('href', $linkEl.attr('data-href').replace('{type}', type));
+            $('#items-name').text($('#items-name').attr('data-text').replace('{type}', text)).show();
         } else {
             $imgEl.hide();
             $nameEl.text($nameEl.attr('data-text-default'));
@@ -286,16 +318,13 @@ $(document).ready(function() {
     }
 
     /**
-     * ★件数カウント用ヘルパー関数★
-     * @param {jQuery} $select - 対象の <select> タグ
-     * @param {Object} counts - カウント結果のオブジェクト
-     * @param {number} totalCount - 全体の件数
+     * 件数カウント用ヘルパー関数
      */
     function updateOptionCounts($select, counts, totalCount) {
         $select.find('option').each(function() {
             const $opt = $(this);
             const val = $opt.val();
-            // data-original-text がなければ、現在のテキストを保存
+            
             if (!$opt.data('original-text')) {
                 $opt.data('original-text', $opt.text());
             }
@@ -304,35 +333,24 @@ $(document).ready(function() {
             if (val) { // "すべて選択" 以外
                 const count = counts[val] || 0;
                 $opt.text(`${originalText} (${count})`);
-                $opt.prop('disabled', count === 0); // 0件なら disabled
+                $opt.prop('disabled', count === 0); 
             } else { // "すべて選択"
                 $opt.text(`${originalText} (${totalCount})`);
             }
         });
     }
     
-    // --- イベントリスナー設定 ---
+    // --- イベントリスナー設定 (リロード版) ---
 
-    // フォームの検索ボタン（submit）またはEnterキー
+    // フォームの検索ボタン(submit)
     $form.on('submit', function(e) {
-        e.preventDefault(); 
-        updateFiltersAndResults(); // ★変更★
-    });
-
-    // ドロップダウンが変更されたら、フィルター連動処理を実行
-    $selects.on('change', function() {
-        updateFiltersAndResults(); // ★変更★
+        // デフォルトの送信(リロード)を許可
     });
 
     // フォームのリセットボタン
-    $form.on('reset', function() {
-        // SumoSelect の選択をリセット
-        $selectType[0].sumo.selectItem(0); // 単一選択
-        $selectMethod[0].sumo.unSelectAll(); // 複数選択
-        $selectProject[0].sumo.unSelectAll(); // 複数選択
-        
-        // 少し遅らせてから実行
-        setTimeout(updateFiltersAndResults, 0); // ★変更★
+    $form.on('reset', function(e) {
+        e.preventDefault(); 
+        window.location.href = window.location.pathname; 
     });
 
     // 検索条件タグの削除ボタン
@@ -341,20 +359,34 @@ $(document).ready(function() {
         const controlId = $button.attr('class').replace('unselect _', '');
         const value = $button.val();
 
+        console.log('Removing condition:', controlId, value);
+
         if (controlId === 'filter_word') {
             $('input#filter_word').val('');
         } else {
             const $select = $(`#${controlId}`);
             if ($select.prop('multiple')) {
-                $select[0].sumo.unSelectItem(value);
+                let vals = $select.val() || [];
+                vals = vals.filter(v => v !== value);
+                $select.val(vals);
+                
+                // ★ SumoSelectの表示を更新
+                if ($select[0].sumo) {
+                    $select[0].sumo.reload();
+                }
             } else {
-                $select[0].sumo.selectItem(0); 
+                $select.val(''); 
+                
+                // ★ SumoSelectの表示を更新
+                if ($select[0].sumo) {
+                    $select[0].sumo.reload();
+                }
             }
         }
-        updateFiltersAndResults(); // ★変更★
+        $form.submit(); 
     });
 
-    // カード内のタグクリック（動的に生成される要素のため 'body' に委任）
+    // カード内のタグクリック
     $('body').on('click', '.search-tags button', function() {
         const $button = $(this);
         const controlId = $button.attr('aria-controls');
@@ -363,22 +395,19 @@ $(document).ready(function() {
         if (controlId && value) {
             const $select = $(`#${controlId}`);
             if ($select.length > 0) {
-                $select[0].sumo.selectItem(value);
-                updateFiltersAndResults(); // ★変更★
-                $('html, body').animate({
-                    scrollTop: $form.offset().top
-                }, 400);
+                $select.val(value);
+                $form.submit(); 
             }
         }
     });
 
-    // 開示事例リンク（動的に生成される要素のため 'body' に委任）
+    // 開示事例リンク(これはリロードしない)
     $('body').on('click', 'a.js-open-case-study', function(e) {
         e.preventDefault(); 
         var targetId = $(this).attr('data-target-id'); 
 
         if (!allCaseStudyData) {
-            $.getJSON('../case-study/case-study.json') 
+            $.getJSON('case-study.json') 
                 .done(function(data) {
                     allCaseStudyData = {};
                     data.forEach(function(item) {
@@ -396,57 +425,67 @@ $(document).ready(function() {
         }
     });
 
-    // --- ★★★ 初期化処理 (ロジック変更) ★★★ ---
+    // --- ★★★ 初期化処理 ★★★ ---
 
     // 1. 最初に [trends.json] を読み込む
-    $.getJSON('../trend/trends.json') 
+    $.getJSON('trends.json') 
         .done(function(data) {
-            allData = data; // データをグローバル変数に保存
+            console.log('trends.json loaded successfully. Total items:', data.length);
+            allData = data; 
 
-            // 2. ★SumoSelectを初期化★ (この時点では件数は 0)
-            $('select#filter_type').SumoSelect({
+            // 2. ページタイトル・業種名表示を先に実行
+            setTrendName();
+            
+            // 3. フィルターの件数を更新し、データ描画まで行う
+            initializeFiltersAndDisplay(); 
+            
+            // 4. ★★★ SumoSelectの初期化をここで行う ★★★
+            $selectType.SumoSelect({
                 placeholder: "業種",
                 csvDispCount: 1,
-                captionFormat: '業種', // 複数選択時の表示
-                captionFormatAllSelected: '業種', // ★「すべて選択」時の表示（追加）
+                captionFormat: '業種', 
+                captionFormatAllSelected: '業種', 
                 outputAsCSV: true
             });
-            $('select#filter_method').SumoSelect({
+            $selectMethod.SumoSelect({
                 placeholder: "物理的リスクの種類",
                 csvDispCount: 1,
-                captionFormat: '物理的リスクの種類', // 複数選択時の表示
-                captionFormatAllSelected: '物理的リスクの種類', // ★「すべて選択」時の表示（追加）
+                captionFormat: '物理的リスクの種類', 
+                captionFormatAllSelected: '物理的リスクの種類', 
                 outputAsCSV: true
             });
-            $('select#filter_project').SumoSelect({
+            $selectProject.SumoSelect({
                 placeholder: "リスク/機会",
                 csvDispCount: 1,
-                captionFormat: 'リスク/機会', // 複数選択時の表示
-                captionFormatAllSelected: 'リスク/機会', // ★「すべて選択」時の表示（追加）
+                captionFormat: 'リスク/機会', 
+                captionFormatAllSelected: 'リスク/機会', 
                 outputAsCSV: true
             });
 
-            // 3. CSSで非表示にされている検索ボックスを「強制的に表示」
+            // 5. CSSで非表示にされている検索ボックスを「強制的に表示」
             $('#filter .input-group').css('display', 'flex');
             $('#filter .inputs').css('display', 'flex'); 
             $('#filter .SumoSelect').css('display', 'inline-block');
 
-            // 4. URLパラメータに基づいて初期絞り込み
-            const params = new URLSearchParams(window.location.search);
-            const type = params.get('type') || '';
-            if (type) {
-                $('select#filter_type')[0].sumo.selectItem(type);
-            }
+            // 6. ★★★ SumoSelect の 'change' イベントリスナーを設定 ★★★
+            let isInitialized = false;
+            setTimeout(function() {
+                isInitialized = true;
+                console.log('SumoSelect initialization completed.');
+            }, 500); // 0.5秒間は初期化中とみなし、changeイベントを無視
 
-            // 5. ページタイトル・業種名表示を実行
-            //    (注：件数更新の前に実行する必要がある)
-            setTrendName();
-            
-            // 6. ★フィルターの件数を更新し、最終的な表示を行う★
-            updateFiltersAndResults();
+            $selects.on('change', function() {
+                // 初期化完了フラグを確認してからsubmitを実行
+                if (isInitialized) {
+                    console.log('Filter changed, submitting form...');
+                    $form.submit();
+                }
+            });
+
         })
         .fail(function(jqXHR, textStatus, errorThrown) { 
             console.error('trends.json の読み込みに失敗しました。', textStatus, errorThrown);
+            console.error('Status:', jqXHR.status, 'Response:', jqXHR.responseText);
             $articleNone.text('データの読み込みに失敗しました。ファイルパスやJSONの形式を確認してください。').show();
         });
 });

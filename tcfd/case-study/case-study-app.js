@@ -111,7 +111,7 @@ $(document).ready(function() {
         });
 
         $('[data-fancybox="item"]').fancybox({
-            baseClass: 'modal-case-study Case', // .Case クラスを付与
+            baseClass: 'modal-case-study Case',
             smallBtn: false,
             afterShow: function(instance, current) {
                 current.$content.find('.image img').css({
@@ -124,20 +124,17 @@ $(document).ready(function() {
     }
 
     /**
-     * ★★★ 連動フィルターの心臓部 ★★★
-     * フィルターの状態が変更されるたびに呼び出される
+     * 連動フィルターの心臓部
      */
     function updateFiltersAndResults() {
         
         // 1. 現在の全フィルターの値を取得
         const currentTypes = $selectType.val() || [];
         const currentMethods = $selectMethod.val() || [];
-        const query = $('input#filter_word').val().toLowerCase().split(/[\s,、。|]+/).filter(Boolean);
+        const query = $('input#filter_word').val(); // URL用に加工前のqを取得
+        const processedQuery = query.toLowerCase().split(/[\s,、。|]+/).filter(Boolean);
 
         // 2. 他フィルターの選択を考慮して、各フィルターの件数を再計算
-        
-        // (A) 「業種」の件数を計算
-        //     (絞り込み条件: method, query)
         let typeCounts = {};
         let typeTotal = 0;
         const typeSubset = allData.filter(item => {
@@ -151,8 +148,6 @@ $(document).ready(function() {
         });
         typeTotal = typeSubset.length;
         
-        // (B) 「物理的リスク」の件数を計算
-        //     (絞り込み条件: type, query)
         let methodCounts = {};
         let methodTotal = 0;
         const methodSubset = allData.filter(item => {
@@ -172,7 +167,7 @@ $(document).ready(function() {
         updateOptionCounts($selectType, typeCounts, typeTotal);
         updateOptionCounts($selectMethod, methodCounts, methodTotal);
 
-        // 4. SumoSelectの表示をリロード（必須）
+        // 4. SumoSelectの表示をリロード
         $selectType[0].sumo.reload();
         $selectMethod[0].sumo.reload();
 
@@ -183,13 +178,13 @@ $(document).ready(function() {
                 if (!item.tags.method || !item.tags.method.some(m => currentMethods.includes(m))) return false;
             }
             
-            if (query.length > 0) {
+            if (processedQuery.length > 0) {
                 const searchableText = [
                     item.title,
                     item.summary,
                     $(item.modal_html).text() 
                 ].join(' ').toLowerCase();
-                return query.every(q => searchableText.includes(q));
+                return processedQuery.every(q => searchableText.includes(q));
             }
             return true;
         });
@@ -197,13 +192,40 @@ $(document).ready(function() {
         // 6. 絞り込んだデータで表を描画
         renderData(filteredData);
         // 7. 検索条件タグを更新
-        updateConditionsDisplay(currentTypes, currentMethods, query);
+        updateConditionsDisplay(currentTypes, currentMethods, processedQuery);
+
+        // 8. ★★★ URLパラメータを更新 ★★★
+        const params = new URLSearchParams();
+        
+        // "すべて選択" (value="") でないものだけをURLに追加
+        const displayTypes = currentTypes.filter(v => v !== "");
+        displayTypes.forEach(type => {
+            params.append('type', type);
+        });
+
+        const displayMethods = currentMethods.filter(v => v !== "");
+        displayMethods.forEach(method => {
+            params.append('method', method);
+        });
+
+        if (query) { // 加工前のquery文字列を使用
+            params.set('q', query);
+        }
+
+        // URLを生成 (e.g., "?type=food&method=acute")
+        // (queryが空でパラメータもなければ、'?' も消す)
+        const newUrl = params.toString() 
+            ? `${window.location.pathname}?${params.toString()}`
+            : window.location.pathname;
+
+        // ページをリロードせずにURLを変更
+        history.pushState(null, '', newUrl);
     }
 
     /**
      * 検索条件タグの表示を更新する関数
      */
-    function updateConditionsDisplay(types, methods, query) {
+    function updateConditionsDisplay(types, methods, query) { // query は processedQuery
         $conditionSamples.empty();
         let hasCondition = false;
         
@@ -242,16 +264,13 @@ $(document).ready(function() {
     }
 
     /**
-     * ★件数カウント用ヘルパー関数★
-     * @param {jQuery} $select - 対象の <select> タグ
-     * @param {Object} counts - カウント結果のオブジェクト
-     * @param {number} totalCount - 全体の件数
+     * 件数カウント用ヘルパー関数
      */
     function updateOptionCounts($select, counts, totalCount) {
         $select.find('option').each(function() {
             const $opt = $(this);
             const val = $opt.val();
-            // data-original-text がなければ、現在のテキストを保存
+            
             if (!$opt.data('original-text')) {
                 $opt.data('original-text', $opt.text());
             }
@@ -260,7 +279,7 @@ $(document).ready(function() {
             if (val) { // "すべて選択" 以外
                 const count = counts[val] || 0;
                 $opt.text(`${originalText} (${count})`);
-                $opt.prop('disabled', count === 0); // 0件なら disabled
+                $opt.prop('disabled', count === 0);
             } else { // "すべて選択"
                 $opt.text(`${originalText} (${totalCount})`);
             }
@@ -272,12 +291,12 @@ $(document).ready(function() {
     // フォームの検索ボタン（submit）またはEnterキー
     $form.on('submit', function(e) {
         e.preventDefault(); 
-        updateFiltersAndResults(); // ★変更★
+        updateFiltersAndResults();
     });
 
-    // ドロップダウンが変更されたら、フィルター連動処理を実行
+    // ドロップダウンが変更されたら、フォームのsubmitイベントを発火
     $selects.on('change', function() {
-        updateFiltersAndResults(); // ★変更★
+        $form.trigger('submit');
     });
 
     // フォームのリセットボタン
@@ -285,7 +304,7 @@ $(document).ready(function() {
         $('select[multiple]').each(function() {
             this.sumo.unSelectAll();
         });
-        setTimeout(updateFiltersAndResults, 0); // ★変更★
+        setTimeout(updateFiltersAndResults, 0);
     });
 
     // 検索条件タグの削除ボタン
@@ -302,10 +321,10 @@ $(document).ready(function() {
                 $select[0].sumo.unSelectItem(value);
             }
         }
-        updateFiltersAndResults(); // ★変更★
+        $form.trigger('submit'); 
     });
 
-    // カード内のタグクリック（動的に生成される要素のため 'body' に委任）
+    // カード内のタグクリック
     $('body').on('click', '.search-tags dd[data-value]', function(e) {
         e.preventDefault();
         const $button = $(this);
@@ -318,7 +337,7 @@ $(document).ready(function() {
 
             if ($select && $select.length > 0) {
                 $select[0].sumo.selectItem(value); 
-                updateFiltersAndResults(); // ★変更★
+                $form.trigger('submit'); 
                 
                 $('html, body').animate({
                     scrollTop: $form.offset().top
@@ -327,36 +346,52 @@ $(document).ready(function() {
         }
     });
 
-    // --- ★★★ 初期化処理 (ロジック変更) ★★★ ---
+    // --- 初期化処理 ---
 
     // 1. 最初に [case-study.json] を読み込む
-    // (index.html と同じフォルダにあると仮定)
     $.getJSON('./case-study.json') 
         .done(function(data) {
             allData = data; // データをグローバル変数に保存
 
-            // 2. SumoSelectを初期化 (この時点では件数は 0)
+            // 2. ★★★ URLパラメータを読み取り、<select> に反映 ★★★
+            const params = new URLSearchParams(window.location.search);
+            const types = params.getAll('type');
+            const methods = params.getAll('method');
+            const query = params.get('q');
+            
+            if (types.length > 0) {
+                $selectType.val(types);
+            }
+            if (methods.length > 0) {
+                $selectMethod.val(methods);
+            }
+            if (query) {
+                $('input#filter_word').val(query);
+            }
+
+            // 3. SumoSelectを初期化 (ここで .val() で設定した値が反映される)
             $selectType.SumoSelect({
                 placeholder: "業種",
                 csvDispCount: 1,
-                captionFormat: '業種',
-                captionFormatAllSelected: '業種',
+                captionFormat: '業種', 
+                captionFormatAllSelected: '業種', 
                 outputAsCSV: true
             });
             $selectMethod.SumoSelect({
                 placeholder: "物理的リスクの種類",
                 csvDispCount: 1,
-                captionFormat: '物理的リスクの種類',
-                captionFormatAllSelected: '物理的リスクの種類',
+                captionFormat: '物理的リスクの種類', 
+                captionFormatAllSelected: '物理的リスクの種類', 
                 outputAsCSV: true
             });
 
-            // 3. CSSで非表示にされている検索ボックスを「強制的に表示」
-            $('#filter .input-group').css('display', 'flex');
+            // 4. CSSで非表示にされている検索ボックスを「強制的に表示」
+            $('#filter .input-group').css('display', 'f');
             $('#filter .inputs').css('display', 'flex'); 
             $('#filter .SumoSelect').css('display', 'inline-block');
 
-            // 4. ★フィルターの件数を更新し、最終的な表示を行う★
+            // 5. フィルターの件数を更新し、最終的な表示を行う
+            // (URLパラメータが反映された状態で初回実行)
             updateFiltersAndResults();
         })
         .fail(function(jqXHR, textStatus, errorThrown) { 
