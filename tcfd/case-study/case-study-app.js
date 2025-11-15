@@ -191,13 +191,14 @@ $(document).ready(function() {
 
         // 6. 絞り込んだデータで表を描画
         renderData(filteredData);
-        // 7. 検索条件タグを更新
-        updateConditionsDisplay(currentTypes, currentMethods, processedQuery);
+        
+        // 7. ★ 検索条件タグを更新（件数を追加）
+        const finalCount = filteredData.length;
+        updateConditionsDisplay(currentTypes, currentMethods, processedQuery, finalCount);
 
-        // 8. ★★★ URLパラメータを更新 ★★★
+        // 8. URLパラメータを更新
         const params = new URLSearchParams();
         
-        // "すべて選択" (value="") でないものだけをURLに追加
         const displayTypes = currentTypes.filter(v => v !== "");
         displayTypes.forEach(type => {
             params.append('type', type);
@@ -208,46 +209,73 @@ $(document).ready(function() {
             params.append('method', method);
         });
 
-        if (query) { // 加工前のquery文字列を使用
+        if (query) {
             params.set('q', query);
         }
 
-        // URLを生成 (e.g., "?type=food&method=acute")
-        // (queryが空でパラメータもなければ、'?' も消す)
         const newUrl = params.toString() 
             ? `${window.location.pathname}?${params.toString()}`
             : window.location.pathname;
 
-        // ページをリロードせずにURLを変更
         history.pushState(null, '', newUrl);
     }
 
     /**
      * 検索条件タグの表示を更新する関数
+     * ★ 修正：件数表示を追加、undefined対策を強化
      */
-    function updateConditionsDisplay(types, methods, query) { // query は processedQuery
+    function updateConditionsDisplay(types, methods, query, finalCount) {
         $conditionSamples.empty();
         let hasCondition = false;
         
-        const displayTypes = types.filter(v => v !== ""); 
-        displayTypes.forEach(function(val) {
-            const text = $selectType.find(`option[value="${val}"]`).data('original-text');
-            addConditionTag(text, 'filter_type', val);
-            hasCondition = true;
-        });
-        
-        const displayMethods = methods.filter(v => v !== "");
-        displayMethods.forEach(function(val) {
-            const text = $selectMethod.find(`option[value="${val}"]`).data('original-text');
-            addConditionTag(text, 'filter_method', val);
-            hasCondition = true;
-        });
-
-        if (query.length > 0) {
-            addConditionTag(query.join(' '), 'filter_word', query.join(' '));
-            hasCondition = true;
+        // ★ typesが空配列でない場合のみ処理
+        if (types && types.length > 0) {
+            const displayTypes = types.filter(v => v !== "");
+            displayTypes.forEach(function(val) {
+                if (val && val !== "") {
+                    let text = $selectType.find(`option[value="${val}"]`).data('original-text');
+                    if (text) { // undefinedでない場合のみ
+                        text = `${text} (${finalCount})`; // ★ 件数を追加
+                        addConditionTag(text, 'filter_type', val);
+                        hasCondition = true;
+                    }
+                }
+            });
         }
-        $conditions.attr('aria-hidden', !hasCondition).toggle(hasCondition);
+        
+        // ★ methodsが空配列でない場合のみ処理
+        if (methods && methods.length > 0) {
+            const displayMethods = methods.filter(v => v !== "");
+            displayMethods.forEach(function(val) {
+                if (val && val !== "") {
+                    let text = $selectMethod.find(`option[value="${val}"]`).data('original-text');
+                    if (text) { // undefinedでない場合のみ
+                        text = `${text} (${finalCount})`; // ★ 件数を追加
+                        addConditionTag(text, 'filter_method', val);
+                        hasCondition = true;
+                    }
+                }
+            });
+        }
+
+        // ★ queryが空配列でない場合のみ処理
+        if (query && query.length > 0) {
+            let text = query.join(' ');
+            if (text && text.trim() !== "") {
+                text = `${text} (${finalCount})`; // ★ 件数を追加
+                addConditionTag(text, 'filter_word', query.join(' '));
+                hasCondition = true;
+            }
+        }
+        
+        // ★ 条件がある場合のみ表示
+        if (hasCondition) {
+            $conditions.attr('aria-hidden', 'false').show();
+            console.log('Search conditions displayed with counts');
+        } else {
+            $conditions.attr('aria-hidden', 'true').hide();
+            console.log('No search conditions - hiding tags');
+        }
     }
 
     /**
@@ -313,6 +341,8 @@ $(document).ready(function() {
         const controlId = $button.attr('class').replace('unselect _', '');
         const value = $button.val();
 
+        console.log('Removing condition:', controlId, value);
+
         if (controlId === 'filter_word') {
             $('input#filter_word').val('');
         } else {
@@ -351,9 +381,10 @@ $(document).ready(function() {
     // 1. 最初に [case-study.json] を読み込む
     $.getJSON('./case-study.json') 
         .done(function(data) {
+            console.log('case-study.json loaded:', data.length, 'items');
             allData = data; // データをグローバル変数に保存
 
-            // 2. ★★★ URLパラメータを読み取り、<select> に反映 ★★★
+            // 2. URLパラメータを読み取り、<select> に反映
             const params = new URLSearchParams(window.location.search);
             const types = params.getAll('type');
             const methods = params.getAll('method');
@@ -369,7 +400,7 @@ $(document).ready(function() {
                 $('input#filter_word').val(query);
             }
 
-            // 3. SumoSelectを初期化 (ここで .val() で設定した値が反映される)
+            // 3. SumoSelectを初期化
             $selectType.SumoSelect({
                 placeholder: "業種",
                 csvDispCount: 1,
@@ -386,16 +417,17 @@ $(document).ready(function() {
             });
 
             // 4. CSSで非表示にされている検索ボックスを「強制的に表示」
-            $('#filter .input-group').css('display', 'f');
+            $('#filter .input-group').css('display', 'flex');
             $('#filter .inputs').css('display', 'flex'); 
             $('#filter .SumoSelect').css('display', 'inline-block');
 
             // 5. フィルターの件数を更新し、最終的な表示を行う
-            // (URLパラメータが反映された状態で初回実行)
             updateFiltersAndResults();
+            
+            console.log('初期化完了');
         })
         .fail(function(jqXHR, textStatus, errorThrown) { 
-            console.error('case-study.json の読み込みに失敗しました。', textStatus, errorThrown);
-            $articleNone.text('データの読み込みに失敗しました。ファイルパスやJSONの形式を確認してください。').show();
+            console.error('case-study.json読み込み失敗:', textStatus, errorThrown);
+            $articleNone.text('データの読み込みに失敗しました。').show();
         });
 });
