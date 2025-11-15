@@ -407,7 +407,7 @@ $(document).ready(function() {
         var targetId = $(this).attr('data-target-id'); 
 
         if (!allCaseStudyData) {
-            $.getJSON('case-study.json') 
+            $.getJSON('../case-study/case-study.json') 
                 .done(function(data) {
                     allCaseStudyData = {};
                     data.forEach(function(item) {
